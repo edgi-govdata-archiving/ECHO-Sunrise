@@ -60,7 +60,7 @@ Partnership between EDGI's Environmental Enforcement Watch and Sunrise Boston hu
     - All ECHO_EXPORTER data for MA (include lat/lon columns so data can be mapped)
     - Summarized table from Report 1
     - Chart from Report 2
-    - Info on specific prison-proximate facilities from Report 3
+    - Info on specific prison-proximate facilities from the prisons analysis
   
 Other considerations
 * Report as much as possible when there are data gaps! For instance, for 50 facilities, EPA has entered the county name as "Metropolitan Boston." There is no such county!!! That means those 50 facilities aren't going to get picked up in our analysis by county.
