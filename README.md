@@ -11,7 +11,7 @@ Partnership between EDGI's Environmental Enforcement Watch and Sunrise Boston hu
   * What are the three "worst offenders" per geography?
   * Try to come up with other metrics and ultimately a sort of "model" or "algorithm" that identifies specific census districts or other geographies of concern. This might include population density, percent minority in surrounding neighborhoods, proximity to prisons/jails/detention centers (note gaps here), relevant Congressional or State House races, etc.
 * **Goal**: 
- * Point out areas for further research and enable Sunrise to raise awareness around individual local facilities, (non) enforcement and compliance trends.
+  * Point out areas for further research and enable Sunrise to raise awareness around individual local facilities, (non) enforcement and compliance trends.
 
 ## Outline of the notebook
 * Load helper code
