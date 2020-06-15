@@ -4,7 +4,7 @@
 Partnership between EDGI's Environmental Enforcement Watch and Sunrise Boston hubs exploring environmental violations, penalties, and injustices in Massachusetts, using EDGI's mirror of the EPA's ECHO database and a customized, Jupyter Notebook-based analysis.
 
 ## Goals and requirements of notebook
-* The kinds of things we want to look at: air pollution, water discharges, waste disposal, and greenhouse gas (GHG) emissions
+* The issues we want to cover: air pollution, water discharges, waste disposal, and greenhouse gas (GHG) emissions
 * **Geographies**: For Mass., look at Congressional Districts, State House districts, and municipalities
 * **Timeframe**: This was not explicitly discussed in our meeting, but the easiest and potentially most salient thing to do is look at the past three years - 12 quarters - worth of data. That timeframe has direct relevance to Congressional races - we could even look at just the past year and a half. It is also a good place to start because then we only need to pull from the ECHO_EXPORTER table.
 * **Metrics**: 
