@@ -30,38 +30,38 @@ Partnership between EDGI's Environmental Enforcement Watch and Sunrise Boston hu
   * Users select the geography they want to explore - that is, how they want to aggregate facility information
   * Users select the data they want to explore
     * Cross-Program
-     * Past 3 years: Overall compliance? Or, for each facility, # of violations / # of regulated programs?
-     * Past 5 years: Total number of enforcement actions against facilities
-     * Past 5 years: Total $ in penalties
+     - Past 3 years: Overall compliance? Or, for each facility, # of violations / # of regulated programs?
+     - Past 5 years: Total number of enforcement actions against facilities
+     - Past 5 years: Total $ in penalties
     * Air
-     * Past 3 years: Compliance (# of quarters in significant non-compliance or in violation)
-     * 2018: Emissions. Use `REGISTRY_ID` to look up 2018 reported emissions of criteria pollutants from `POLL_RPT_COMBINED_EMISSIONS` table
+     - Past 3 years: Compliance (# of quarters in significant non-compliance or in violation)
+     - 2018: Emissions. Use `REGISTRY_ID` to look up 2018 reported emissions of criteria pollutants from `POLL_RPT_COMBINED_EMISSIONS` table
     * GHG
-     * 2018: Tonnes of CO2 equivalent reported released
-     * This ^^^ translated into the social cost of carbon ($)
+     - 2018: Tonnes of CO2 equivalent reported released
+     - This ^^^ translated into the social cost of carbon ($)
     * Water
-     * Past 3 years: Compliance (# of quarters in significant non-compliance or in violation)
-     * 2018: Use `WATER_IDS` to look up 2018 reported discharges for key pollutants. Would need to get the FY 2018 version of NPDES_DMR table, which would be a huge file.
+     - Past 3 years: Compliance (# of quarters in significant non-compliance or in violation)
+     - 2018: Use `WATER_IDS` to look up 2018 reported discharges for key pollutants. Would need to get the FY 2018 version of NPDES_DMR table, which would be a huge file.
     * Drinking water
-     * ?
+     - ?
     * Waste
-     * Past 3 years: Compliance
+     - Past 3 years: Compliance
   * Reports
-   1. Where are the worst offenders?
-      * Aggregate data selected above, create new map, and shade selected geography by the selected variable e.g. % of facilities in non-compliance.
-      * Report the **three** geographies (Congressional Districts, zip codes, etc.) that are worst for the selected variable.
- 2. What does this mean for EJ?
-      * Foucsing on the three geographies that are worst, create a new map that shows all facilities in these geographies, shaded by `FAC_PERCENT_MINORITY` or percent in poverty or `Over80Count` or some combination of the two (see here for sequential x sequential bivariate colour schemes: https://www.axismaps.com/guide/multivariate/bivariate-choropleth/#:~:text=There%20are%20two%20kinds%20of,or%20with%20rankable%20categorical%20data) and sized by the variable of interest (# of non-compliance quarters, penalties, emissions, etc.) See here for an example map: https://github.com/edgi-govdata-archiving/Environmental-Enforcement-Watch/issues/29
-      * Create and show a scatter plot where, for these geographies, the x-axis is `FAC_PERCENT_MINORITY` and the y-axis is percent in poverty or `Over80Count` and facilities are plotted accordingly. Average/median also plotted. 
-      * A challenge is getting percent in poverty information - this is not available directly in ECHO_EXPORTER. `Over80Count` (or `Over80CountUs`) is a field from EJScreen that ECHO pulls in. It is a summary of the number of EJ indices that the census block group the facility is in registers in the 80th percentile nationally. So, if a facility was in a census block group that was among the top 20% block groups nationally when it came to air toxics cancer risk, it would get a 1. If it was also in the top 20% for PM, then its value would be 2. See the complete list of indices here: https://echo.epa.gov/tools/web-services/detailed-facility-report#/Detailed%20Facility%20Report/get_dfr_rest_services_get_ejscreen_indexes As far as I can tell, this is only available through the ECHO API. However, we could add it to the SBU database from here: ftp://newftp.epa.gov/EJSCREEN/2019/
- 3. Prisons
-      * TBD in consultation with Nick Shapiro's Carceral Ecologies project. Use NACIS codes to show prisons, jails, and detention centers in the three worst geographies, and the facilities within a certain distance (e.g. 3 miles) of them. See here: https://geopandas.org/geometric_manipulations.html
+     * 1: Where are the worst offenders?
+      - Aggregate data selected above, create new map, and shade selected geography by the selected variable e.g. % of facilities in non-compliance.
+      - Report the **three** geographies (Congressional Districts, zip codes, etc.) that are worst for the selected variable.
+     * 2: What does this mean for EJ?
+      - Foucsing on the three geographies that are worst, create a new map that shows all facilities in these geographies, shaded by `FAC_PERCENT_MINORITY` or percent in poverty or `Over80Count` or some combination of the two (see here for sequential x sequential bivariate colour schemes: https://www.axismaps.com/guide/multivariate/bivariate-choropleth/#:~:text=There%20are%20two%20kinds%20of,or%20with%20rankable%20categorical%20data) and sized by the variable of interest (# of non-compliance quarters, penalties, emissions, etc.) See here for an example map: https://github.com/edgi-govdata-archiving/Environmental-Enforcement-Watch/issues/29
+      - Create and show a scatter plot where, for these geographies, the x-axis is `FAC_PERCENT_MINORITY` and the y-axis is percent in poverty or `Over80Count` and facilities are plotted accordingly. Average/median also plotted. 
+      - A challenge is getting percent in poverty information - this is not available directly in ECHO_EXPORTER. `Over80Count` (or `Over80CountUs`) is a field from EJScreen that ECHO pulls in. It is a summary of the number of EJ indices that the census block group the facility is in registers in the 80th percentile nationally. So, if a facility was in a census block group that was among the top 20% block groups nationally when it came to air toxics cancer risk, it would get a 1. If it was also in the top 20% for PM, then its value would be 2. See the complete list of indices here: https://echo.epa.gov/tools/web-services/detailed-facility-report#/Detailed%20Facility%20Report/get_dfr_rest_services_get_ejscreen_indexes As far as I can tell, this is only available through the ECHO API. However, we could add it to the SBU database from here: ftp://newftp.epa.gov/EJSCREEN/2019/
+     * 3: Prisons
+      - TBD in consultation with Nick Shapiro's Carceral Ecologies project. Use NACIS codes to show prisons, jails, and detention centers in the three worst geographies, and the facilities within a certain distance (e.g. 3 miles) of them. See here: https://geopandas.org/geometric_manipulations.html
   * Export
      * Users can export:
-       * All ECHO_EXPORTER data for MA (include lat/lon columns so data can be mapped)
-       * Summarized table from Report 1
-       * Chart from Report 2
-       * Info on specific prison-proximate facilities from Report 3
+      - All ECHO_EXPORTER data for MA (include lat/lon columns so data can be mapped)
+      - Summarized table from Report 1
+      - Chart from Report 2
+      - Info on specific prison-proximate facilities from Report 3
   
 Other considerations
 * Report as much as possible when there are data gaps! For instance, for 50 facilities, EPA has entered the county name as "Metropolitan Boston." There is no such county!!! That means those 50 facilities aren't going to get picked up in our analysis by county.
