@@ -7,10 +7,14 @@ Partnership between EDGI's Environmental Enforcement Watch and Sunrise Boston hu
 * Programs: air, water, waste, and GHG
 * Geographies: For Mass., look at census districts, State House districts, and municipalities
 * Metrics: 
-* * What are the three "worst offenders" per geography?
-* * Try to come up with other metrics and ultimately a sort of "model" or "algorithm" that identifies specific census districts or other geographies of concern. This might include population density, percent minority in surrounding neighborhoods, proximity to prisons/jails/detention centers (note gaps here), relevant Congressional race, etc.
+ * What are the three "worst offenders" per geography?
+ * Try to come up with other metrics and ultimately a sort of "model" or "algorithm" that identifies specific census districts or other geographies of concern. This might include population density, percent minority in surrounding neighborhoods, proximity to prisons/jails/detention centers (note gaps here), relevant Congressional race, etc.
+* Enable Sunrise to raise awareness around local facilities, (non) enforcement and compliance trends
 
 ## Outline of the notebook
+* Load helper code
+* Load map of MA showing different possible geographies
+* Users select the geography they wanted
 
 ## How to start contributing to this repo
 * Contact @ericnost, @crgreenleaf, or other contributors listed below!
