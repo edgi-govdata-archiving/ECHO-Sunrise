@@ -1,29 +1,29 @@
  [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/edgi-govdata-archiving/overview/blob/master/CONDUCT.md)
 
 # ECHO-Sunrise
-Partnership between EDGI/EEW and Sunrise exploring environmental infractions, penalties, and injustices in Massachussets, using the EPA's ECHO database and Jupyter Notebook-based analysis. The notebook we are developing to do this is in its early stages. Some features we have discussed:
+Partnership between EDGI's Environmental Enforcement Watch and Sunrise Boston hubs exploring environmental violations, penalties, and injustices in Massachusetts, using EDGI's mirror of the EPA's ECHO database and a customized, Jupyter Notebook-based analysis.
 
+## Outline of the notebook
 - Examine all programs/media (air, water, waste, GHG)
 - Geographies: For MA, look at CDs, State House districts, and municipalities
 - Metrics: Try to come up with some sort of "model" or "algorithm" that helps us narrow in on specific CDs or other geographies to look at more closely. This might include population density, percent minority in surrounding neighborhoods, proximity to prisons/jails/detention centers (note gaps here), relevant Congressional race, etc.
 
-## Outline of the notebook
-TBD
-
 # How to start contributing to this repo
-* Contact @ericnost
+* Contact @ericnost, @crgreenleaf, or other contributors listed below!
 * Slack channel - #eew_coordination
+* Check out our [good-first-issue](https://github.com/edgi-govdata-archiving/ECHO-Sunrise/labels/good%20first%20issue)s label
 
-**Additional components TBD:**
-* A "How to use" section if the repo's project is a tool or website
-* A link to the [good-first-issue](https://github.com/issues?q=is%3Aopen+is%3Aissue+label%3Agood-first-issue+user%3Aedgi-govdata-archiving) label (this link across EDGI, or a specific link for the repo)
-* Highlight "ready" label on issues to mean "this is an issue that is ready to work on and needs an owner"
-* Additional badges at the top, such as code quality indicators
-* "[All contributors](https://github.com/kentcdodds/all-contributors#emoji-key)" listing, following these additional guidelines (example: [web-monitoring-db contributors list](https://github.com/edgi-govdata-archiving/web-monitoring-db#contributors)):
-  - Compact representation without avatars (less visual noise; easier to focus on contributions)
-  - Icons are links with title attributes (accessibility)
-  - Alphabetical order by surname/name/username (to eliminate implied ranking)
-  - Presence in the list (and the name used) is optional and up to the contributor (not everyone wants to be listed — we offer, but do not add unless someone explicitly says yes)
+# Contributors
+| Name | Github | Org | 
+| ------|--------|--|
+| Sara Wylie | @saraannwylie | EEW |
+| Lourdes Vera | @lourdesvera | EEW |
+| Casey Greenleaf | @crgreenleaf | EEW |
+| Steve Hansen | @shansen5 | EEW |
+| Eric Nost | @ericnost  | EEW |
+| Kelsey Breseman | @Frijol | EEW |
+| Dietmar Offenhuber | @dietoff | EEW |
+| Gaby Trudo| @gabrielletrudo | EEW |
 
 ---
 
