@@ -30,7 +30,7 @@ def mapper_marker(df):
     # Show the map
     return m
 
-def mapper_circle(df):
+def mapper_circle(df, a):
     # Initialize the map
     m = folium.Map()
 
