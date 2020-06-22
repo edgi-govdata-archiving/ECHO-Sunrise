@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<!-- saved from url=(0080)http://localhost:8888/notebooks/Documents/GitHub/ECHO-Sunrise/ECHO-Sunrise.ipynb -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
+    
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="./leaflet.js"></script>
+    <script src="./jquery-1.12.4.min.js"></script>
+    <script src="./bootstrap.min.js"></script>
+    <script src="./leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="./leaflet.css">
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <link rel="stylesheet" href="./bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./font-awesome.min.css">
+    <link rel="stylesheet" href="./leaflet.awesome-markers.css">
+    <link rel="stylesheet" href="./leaflet.awesome.rotate.css">
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+            <style>
+                #map_715fe91fb628445a8d31eff02b44e6b5 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="./leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="./MarkerCluster.css">
+    <link rel="stylesheet" href="./MarkerCluster.Default.css">
+</head>
+<body>    
+    
+            <div class="folium-map leaflet-container leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag" id="map_715fe91fb628445a8d31eff02b44e6b5" tabindex="0"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;"><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18; transform: translate3d(0px, 0px, 0px) scale(1);"><img alt="" role="presentation" src="./94.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(266px, 86px, 0px); opacity: 1;"><img alt="" role="presentation" src="./93.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(266px, -170px, 0px); opacity: 1;"><img alt="" role="presentation" src="./94(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(10px, 86px, 0px); opacity: 1;"><img alt="" role="presentation" src="./94(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(522px, 86px, 0px); opacity: 1;"><img alt="" role="presentation" src="./95.png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(266px, 342px, 0px); opacity: 1;"><img alt="" role="presentation" src="./93(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(10px, -170px, 0px); opacity: 1;"><img alt="" role="presentation" src="./93(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(522px, -170px, 0px); opacity: 1;"><img alt="" role="presentation" src="./95(1).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(10px, 342px, 0px); opacity: 1;"><img alt="" role="presentation" src="./95(2).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(522px, 342px, 0px); opacity: 1;"><img alt="" role="presentation" src="./94(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-246px, 86px, 0px); opacity: 1;"><img alt="" role="presentation" src="./94(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(778px, 86px, 0px); opacity: 1;"><img alt="" role="presentation" src="./93(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-246px, -170px, 0px); opacity: 1;"><img alt="" role="presentation" src="./93(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(778px, -170px, 0px); opacity: 1;"><img alt="" role="presentation" src="./95(3).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(-246px, 342px, 0px); opacity: 1;"><img alt="" role="presentation" src="./95(4).png" class="leaflet-tile leaflet-tile-loaded" style="width: 256px; height: 256px; transform: translate3d(778px, 342px, 0px); opacity: 1;"></div></div></div><div class="leaflet-pane leaflet-shadow-pane"></div><div class="leaflet-pane leaflet-overlay-pane"><svg pointer-events="none" class="leaflet-zoom-animated" width="1182" height="709" viewBox="-98 -59 1182 709" style="transform: translate3d(-98px, -59px, 0px) scale(1);"><g><path class="leaflet-interactive" stroke="black" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="orange" fill-opacity="0.4" fill-rule="evenodd" d="M260,192a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 "></path></g></svg></div><div class="leaflet-pane leaflet-marker-pane"><div class="leaflet-marker-icon marker-cluster marker-cluster-small leaflet-zoom-animated leaflet-interactive" tabindex="0" style="margin-left: -20px; margin-top: -20px; width: 40px; height: 40px; transform: translate3d(387px, 228px, 0px); z-index: 228; opacity: 1;"><div><span>2</span></div></div><div class="leaflet-marker-icon marker-cluster marker-cluster-small leaflet-zoom-animated leaflet-interactive" tabindex="0" style="margin-left: -20px; margin-top: -20px; width: 40px; height: 40px; transform: translate3d(249px, 250px, 0px); z-index: 250; opacity: 1;"><div><span>3</span></div></div><div class="leaflet-marker-icon marker-cluster marker-cluster-medium leaflet-zoom-animated leaflet-interactive" tabindex="0" style="margin-left: -20px; margin-top: -20px; width: 40px; height: 40px; transform: translate3d(368px, 308px, 0px); z-index: 308; opacity: 1;"><div><span>13</span></div></div><div class="leaflet-marker-icon marker-cluster marker-cluster-medium leaflet-zoom-animated leaflet-interactive" tabindex="0" style="margin-left: -20px; margin-top: -20px; width: 40px; height: 40px; transform: translate3d(666px, 403px, 0px); z-index: 403; opacity: 1;"><div><span>13</span></div></div><div class="leaflet-marker-icon marker-cluster marker-cluster-small leaflet-zoom-animated leaflet-interactive" tabindex="0" style="margin-left: -20px; margin-top: -20px; width: 40px; height: 40px; transform: translate3d(633px, 347px, 0px); z-index: 347; opacity: 1;"><div><span>5</span></div></div><div class="leaflet-marker-icon marker-cluster marker-cluster-medium leaflet-zoom-animated leaflet-interactive" tabindex="0" style="margin-left: -20px; margin-top: -20px; width: 40px; height: 40px; transform: translate3d(520px, 291px, 0px); z-index: 291; opacity: 1;"><div><span>19</span></div></div><div class="leaflet-marker-icon marker-cluster marker-cluster-medium leaflet-zoom-animated leaflet-interactive" tabindex="0" style="margin-left: -20px; margin-top: -20px; width: 40px; height: 40px; transform: translate3d(634px, 241px, 0px); z-index: 241; opacity: 1;"><div><span>40</span></div></div></div><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"></div><div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(19682.7px, 24273.6px, 0px) scale(128);"></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="http://localhost:8888/notebooks/Documents/GitHub/ECHO-Sunrise/ECHO-Sunrise.ipynb#" title="Zoom in" role="button" aria-label="Zoom in">+</a><a class="leaflet-control-zoom-out" href="http://localhost:8888/notebooks/Documents/GitHub/ECHO-Sunrise/ECHO-Sunrise.ipynb#" title="Zoom out" role="button" aria-label="Zoom out">−</a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com/" title="A JS library for interactive maps">Leaflet</a> | Data by © <a href="http://openstreetmap.org/">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.</div></div></div></div>
+        
+
+<script>    
+    
+            var map_715fe91fb628445a8d31eff02b44e6b5 = L.map(
+                "map_715fe91fb628445a8d31eff02b44e6b5",
+                {
+                    center: [0, 0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 1,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b8d6f273516c4c498dd2761b5e2f0d27 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_715fe91fb628445a8d31eff02b44e6b5);
+        
+    
+            var fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632 = (function(){
+                
+                var callback = function (row) {
+                    var icon = L.AwesomeMarkers.icon();
+                    var marker = L.marker(new L.LatLng(row[0], row[1]));
+                    marker.setIcon(icon);
+                    return marker;
+                };
+
+                var data = [];
+                var cluster = L.markerClusterGroup({"disableClusteringAtZoom": 10, "showCoverageOnHover": false});
+
+                for (var i = 0; i < data.length; i++) {
+                    var row = data[i];
+                    var marker = callback(row);
+                    marker.addTo(cluster);
+                }
+
+                cluster.addTo(map_715fe91fb628445a8d31eff02b44e6b5);
+                return cluster;
+            })();
+        
+    
+            var circle_marker_32ab580a3230439baf906a84ffd0f84a = L.circleMarker(
+                [41.731171, -70.58375699999998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_f7ab2bbb677c4dac97e5ada51ff15e07 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_31fb70cd2c23438a979600eb3458ce19 = $(`<div id="html_31fb70cd2c23438a979600eb3458ce19" style="width: 100.0%; height: 100.0%;">BOURNE LANDFILL & TRANSFER STATION</div>`)[0];
+            popup_f7ab2bbb677c4dac97e5ada51ff15e07.setContent(html_31fb70cd2c23438a979600eb3458ce19);
+        
+
+        circle_marker_32ab580a3230439baf906a84ffd0f84a.bindPopup(popup_f7ab2bbb677c4dac97e5ada51ff15e07)
+        ;
+
+        
+    
+    
+            var circle_marker_e15ef5c526264e59ab9fcab52cc3faad = L.circleMarker(
+                [42.49891, -71.16311],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_0b5469e12a7144de8aaabb64df3df363 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_08fcea595d8c4a239fb4f675640dce48 = $(`<div id="html_08fcea595d8c4a239fb4f675640dce48" style="width: 100.0%; height: 100.0%;">SKYWORKS SOLUTIONS INC</div>`)[0];
+            popup_0b5469e12a7144de8aaabb64df3df363.setContent(html_08fcea595d8c4a239fb4f675640dce48);
+        
+
+        circle_marker_e15ef5c526264e59ab9fcab52cc3faad.bindPopup(popup_0b5469e12a7144de8aaabb64df3df363)
+        ;
+
+        
+    
+    
+            var circle_marker_4ea6341ddaee4493b11f708be1f71d58 = L.circleMarker(
+                [42.36092, -71.09326],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_206e4ee78cfb4558b2d372036fde598b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a4bd37820bd345859b23e64f51033003 = $(`<div id="html_a4bd37820bd345859b23e64f51033003" style="width: 100.0%; height: 100.0%;">MIT COGENERATION PLANT</div>`)[0];
+            popup_206e4ee78cfb4558b2d372036fde598b.setContent(html_a4bd37820bd345859b23e64f51033003);
+        
+
+        circle_marker_4ea6341ddaee4493b11f708be1f71d58.bindPopup(popup_206e4ee78cfb4558b2d372036fde598b)
+        ;
+
+        
+    
+    
+            var circle_marker_8b856ded262e49c394bfde0347ed0e4b = L.circleMarker(
+                [42.048067, -72.647927],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_35c4d8c1a0b342a3a70eb7025c56b4b8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_dafec24f018846baadefc6f34f8aaaa1 = $(`<div id="html_dafec24f018846baadefc6f34f8aaaa1" style="width: 100.0%; height: 100.0%;">BERKSHIRE POWER PLANT</div>`)[0];
+            popup_35c4d8c1a0b342a3a70eb7025c56b4b8.setContent(html_dafec24f018846baadefc6f34f8aaaa1);
+        
+
+        circle_marker_8b856ded262e49c394bfde0347ed0e4b.bindPopup(popup_35c4d8c1a0b342a3a70eb7025c56b4b8)
+        ;
+
+        
+    
+    
+            var circle_marker_d8e04d0d9d1244d789434da67d17fb46 = L.circleMarker(
+                [42.34975, -71.057967],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_a1b8cb2bffe44a9bb280e34642197d9c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4a8eb548de2240e99c2a7947549c6647 = $(`<div id="html_4a8eb548de2240e99c2a7947549c6647" style="width: 100.0%; height: 100.0%;">VEOLIA - STEAM GENERATING PLANT</div>`)[0];
+            popup_a1b8cb2bffe44a9bb280e34642197d9c.setContent(html_4a8eb548de2240e99c2a7947549c6647);
+        
+
+        circle_marker_d8e04d0d9d1244d789434da67d17fb46.bindPopup(popup_a1b8cb2bffe44a9bb280e34642197d9c)
+        ;
+
+        
+    
+    
+            var circle_marker_e6964880a2fe4df9b61a3a2fd1addc52 = L.circleMarker(
+                [42.06418, -70.979535],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_3b034c28cf2942bf8a60785bdc554936 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1326cd626fb54867b7a91123417124b7 = $(`<div id="html_1326cd626fb54867b7a91123417124b7" style="width: 100.0%; height: 100.0%;">GAS RECOVERY SYSTEMS</div>`)[0];
+            popup_3b034c28cf2942bf8a60785bdc554936.setContent(html_1326cd626fb54867b7a91123417124b7);
+        
+
+        circle_marker_e6964880a2fe4df9b61a3a2fd1addc52.bindPopup(popup_3b034c28cf2942bf8a60785bdc554936)
+        ;
+
+        
+    
+    
+            var circle_marker_716bde467a7a4da094da1b2094f676ae = L.circleMarker(
+                [42.521667, -70.939444],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_19f67c0aa78a4eeda7ce718a59664887 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7a425d71be734585b68bd3859c741de2 = $(`<div id="html_7a425d71be734585b68bd3859c741de2" style="width: 100.0%; height: 100.0%;">ROUSSELOT GELATINE</div>`)[0];
+            popup_19f67c0aa78a4eeda7ce718a59664887.setContent(html_7a425d71be734585b68bd3859c741de2);
+        
+
+        circle_marker_716bde467a7a4da094da1b2094f676ae.bindPopup(popup_19f67c0aa78a4eeda7ce718a59664887)
+        ;
+
+        
+    
+    
+            var circle_marker_c6b96fb466ec4e57ae6d60ebc1ef38e1 = L.circleMarker(
+                [42.631218, -71.312708],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_f2a99035cab54870a03b33136d60affa = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3acb9ea0b16b453c8eedfaf30184dea9 = $(`<div id="html_3acb9ea0b16b453c8eedfaf30184dea9" style="width: 100.0%; height: 100.0%;">L'ENERGIA ENERGY CENTER</div>`)[0];
+            popup_f2a99035cab54870a03b33136d60affa.setContent(html_3acb9ea0b16b453c8eedfaf30184dea9);
+        
+
+        circle_marker_c6b96fb466ec4e57ae6d60ebc1ef38e1.bindPopup(popup_f2a99035cab54870a03b33136d60affa)
+        ;
+
+        
+    
+    
+            var circle_marker_fc32c159b4524e378c5c80db83549fb1 = L.circleMarker(
+                [41.724511, -70.98475],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_1e4fdbafaeb44d758e3793c0b16b6783 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c9ca2fad25334542bac50e30f45adc6f = $(`<div id="html_c9ca2fad25334542bac50e30f45adc6f" style="width: 100.0%; height: 100.0%;">CRAPO HILL LANDFILL</div>`)[0];
+            popup_1e4fdbafaeb44d758e3793c0b16b6783.setContent(html_c9ca2fad25334542bac50e30f45adc6f);
+        
+
+        circle_marker_fc32c159b4524e378c5c80db83549fb1.bindPopup(popup_1e4fdbafaeb44d758e3793c0b16b6783)
+        ;
+
+        
+    
+    
+            var circle_marker_fbffb7e175864019a1d868de4bcb8e82 = L.circleMarker(
+                [42.6432, -73.1135],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_034301bbd6344e3989032437799a9f8b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_df168344a6f3427a87a13942eef180df = $(`<div id="html_df168344a6f3427a87a13942eef180df" style="width: 100.0%; height: 100.0%;">SPECIALTY MINERALS, INC.</div>`)[0];
+            popup_034301bbd6344e3989032437799a9f8b.setContent(html_df168344a6f3427a87a13942eef180df);
+        
+
+        circle_marker_fbffb7e175864019a1d868de4bcb8e82.bindPopup(popup_034301bbd6344e3989032437799a9f8b)
+        ;
+
+        
+    
+    
+            var circle_marker_8e5f47c852ad41eda4a3132e809f84fd = L.circleMarker(
+                [42.363464, -71.079669],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_44e9398c30e74b94bbfa2a1657ae3814 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6e5bd7a006ad4107969a2ecdb8abb254 = $(`<div id="html_6e5bd7a006ad4107969a2ecdb8abb254" style="width: 100.0%; height: 100.0%;">GENON KENDALL, LLC</div>`)[0];
+            popup_44e9398c30e74b94bbfa2a1657ae3814.setContent(html_6e5bd7a006ad4107969a2ecdb8abb254);
+        
+
+        circle_marker_8e5f47c852ad41eda4a3132e809f84fd.bindPopup(popup_44e9398c30e74b94bbfa2a1657ae3814)
+        ;
+
+        
+    
+    
+            var circle_marker_bc08529f31cb4db4af129c53c43a6796 = L.circleMarker(
+                [42.090524, -72.590858],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_8e94aec5e4d94910ab483b2c886f518a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f50f32a9eed149fe921fa266da45d75f = $(`<div id="html_f50f32a9eed149fe921fa266da45d75f" style="width: 100.0%; height: 100.0%;">COVANTA RESOURCE RECOVERY PLANT</div>`)[0];
+            popup_8e94aec5e4d94910ab483b2c886f518a.setContent(html_f50f32a9eed149fe921fa266da45d75f);
+        
+
+        circle_marker_bc08529f31cb4db4af129c53c43a6796.bindPopup(popup_8e94aec5e4d94910ab483b2c886f518a)
+        ;
+
+        
+    
+    
+            var circle_marker_516df2ef83844dbdaf16a37dfd4bb7cb = L.circleMarker(
+                [42.543216, -70.928979],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_3100ca726e77460b8f446c9884f4e22d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a504e2b403ed45498234acca24a12832 = $(`<div id="html_a504e2b403ed45498234acca24a12832" style="width: 100.0%; height: 100.0%;">PEABODY MUNICIPAL LIGHT PLANT</div>`)[0];
+            popup_3100ca726e77460b8f446c9884f4e22d.setContent(html_a504e2b403ed45498234acca24a12832);
+        
+
+        circle_marker_516df2ef83844dbdaf16a37dfd4bb7cb.bindPopup(popup_3100ca726e77460b8f446c9884f4e22d)
+        ;
+
+        
+    
+    
+            var circle_marker_8ed98e68778d4583a19051f25f87fad9 = L.circleMarker(
+                [42.30079, -73.25084],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_9072c4f1ce2a42c3beca7586585b1bb6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a9efca12f5024d209fc3568cdf3809e1 = $(`<div id="html_a9efca12f5024d209fc3568cdf3809e1" style="width: 100.0%; height: 100.0%;">OLDCASTLE STONE PRODUCTS</div>`)[0];
+            popup_9072c4f1ce2a42c3beca7586585b1bb6.setContent(html_a9efca12f5024d209fc3568cdf3809e1);
+        
+
+        circle_marker_8ed98e68778d4583a19051f25f87fad9.bindPopup(popup_9072c4f1ce2a42c3beca7586585b1bb6)
+        ;
+
+        
+    
+    
+            var circle_marker_9bd95f2defa34f3f9701614847ce8446 = L.circleMarker(
+                [42.3048, -71.8015],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_7f3f0d04d64b469dadc8fb238d3e9ec2 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_437a0d4270bd456fae4bb839c25f5812 = $(`<div id="html_437a0d4270bd456fae4bb839c25f5812" style="width: 100.0%; height: 100.0%;">SAINT GOBAIN ABRASIVES</div>`)[0];
+            popup_7f3f0d04d64b469dadc8fb238d3e9ec2.setContent(html_437a0d4270bd456fae4bb839c25f5812);
+        
+
+        circle_marker_9bd95f2defa34f3f9701614847ce8446.bindPopup(popup_7f3f0d04d64b469dadc8fb238d3e9ec2)
+        ;
+
+        
+    
+    
+            var circle_marker_78b45be79ce7450db7b1fd227ab5b6e9 = L.circleMarker(
+                [42.53093, -71.14964],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_d3be3b2153d0450f9e7459166b78641b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_90b454ebaf754a1aabdae11c4e5c953d = $(`<div id="html_90b454ebaf754a1aabdae11c4e5c953d" style="width: 100.0%; height: 100.0%;">ANALOG DEVICES MANUFACTURING</div>`)[0];
+            popup_d3be3b2153d0450f9e7459166b78641b.setContent(html_90b454ebaf754a1aabdae11c4e5c953d);
+        
+
+        circle_marker_78b45be79ce7450db7b1fd227ab5b6e9.bindPopup(popup_d3be3b2153d0450f9e7459166b78641b)
+        ;
+
+        
+    
+    
+            var circle_marker_de1546f993c44f5f8f04e02ee6b0a827 = L.circleMarker(
+                [42.60008, -72.37838],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_ec03564057ce41a3b5ab5a6da09c61a5 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f3158e8a3731422d966b61524c23dd0f = $(`<div id="html_f3158e8a3731422d966b61524c23dd0f" style="width: 100.0%; height: 100.0%;">ERVING PAPER MILLS</div>`)[0];
+            popup_ec03564057ce41a3b5ab5a6da09c61a5.setContent(html_f3158e8a3731422d966b61524c23dd0f);
+        
+
+        circle_marker_de1546f993c44f5f8f04e02ee6b0a827.bindPopup(popup_ec03564057ce41a3b5ab5a6da09c61a5)
+        ;
+
+        
+    
+    
+            var circle_marker_f7aa5e2a698449e1a5f609baa341a484 = L.circleMarker(
+                [42.34512, -71.05441],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_6e8cc2cd9e264a4ebafa8c9d196d8890 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2039c3b3fb4b4f7b87ce75ab815235b3 = $(`<div id="html_2039c3b3fb4b4f7b87ce75ab815235b3" style="width: 100.0%; height: 100.0%;">GILLETTE MANUFACTURING</div>`)[0];
+            popup_6e8cc2cd9e264a4ebafa8c9d196d8890.setContent(html_2039c3b3fb4b4f7b87ce75ab815235b3);
+        
+
+        circle_marker_f7aa5e2a698449e1a5f609baa341a484.bindPopup(popup_6e8cc2cd9e264a4ebafa8c9d196d8890)
+        ;
+
+        
+    
+    
+            var circle_marker_a5602cea8f564580a5e3420ce601c173 = L.circleMarker(
+                [42.1218, -72.0021],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_cd37b1a0592c46909ea3c7867c196e29 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_80c9daff33044a158799c1ffb5f2ba21 = $(`<div id="html_80c9daff33044a158799c1ffb5f2ba21" style="width: 100.0%; height: 100.0%;">TENNESSEE GAS PIPLINE STA 264</div>`)[0];
+            popup_cd37b1a0592c46909ea3c7867c196e29.setContent(html_80c9daff33044a158799c1ffb5f2ba21);
+        
+
+        circle_marker_a5602cea8f564580a5e3420ce601c173.bindPopup(popup_cd37b1a0592c46909ea3c7867c196e29)
+        ;
+
+        
+    
+    
+            var circle_marker_9075902c7d9d45b985bddcf4d383f58a = L.circleMarker(
+                [42.127778, -71.51055600000002],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_a6fbf096cfa34e43ad8ccef569d7928c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9c8f9a9a910941f7b36a08541394e76e = $(`<div id="html_9c8f9a9a910941f7b36a08541394e76e" style="width: 100.0%; height: 100.0%;">SAINT GOBAIN CONTAINERS</div>`)[0];
+            popup_a6fbf096cfa34e43ad8ccef569d7928c.setContent(html_9c8f9a9a910941f7b36a08541394e76e);
+        
+
+        circle_marker_9075902c7d9d45b985bddcf4d383f58a.bindPopup(popup_a6fbf096cfa34e43ad8ccef569d7928c)
+        ;
+
+        
+    
+    
+            var circle_marker_7e45a1ac68424e97862c77ff652c2174 = L.circleMarker(
+                [42.3874, -72.07949],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_f4a04b7173624d31b6cb0a85f02526de = L.popup({"maxWidth": "100%"});
+
+        
+            var html_bc99f385521a4328adac5e54c4cf3b7c = $(`<div id="html_bc99f385521a4328adac5e54c4cf3b7c" style="width: 100.0%; height: 100.0%;">LANDFILL & GAS GENERATING FACILITY</div>`)[0];
+            popup_f4a04b7173624d31b6cb0a85f02526de.setContent(html_bc99f385521a4328adac5e54c4cf3b7c);
+        
+
+        circle_marker_7e45a1ac68424e97862c77ff652c2174.bindPopup(popup_f4a04b7173624d31b6cb0a85f02526de)
+        ;
+
+        
+    
+    
+            var circle_marker_f747e356d895490bb4162f040ada3ff7 = L.circleMarker(
+                [42.197241, -72.509508],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_4e96136f2de547748f4232ec5481789e = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c969ff09125c4c39a6704e2b0eee3d43 = $(`<div id="html_c969ff09125c4c39a6704e2b0eee3d43" style="width: 100.0%; height: 100.0%;">STONY BROOK WHOLESALE ENERGY CENTER</div>`)[0];
+            popup_4e96136f2de547748f4232ec5481789e.setContent(html_c969ff09125c4c39a6704e2b0eee3d43);
+        
+
+        circle_marker_f747e356d895490bb4162f040ada3ff7.bindPopup(popup_4e96136f2de547748f4232ec5481789e)
+        ;
+
+        
+    
+    
+            var circle_marker_ff18c1dfa085425188f6d0d4039f86d4 = L.circleMarker(
+                [42.36429, -71.1148],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_d2fca55c6f47404d98fd4f4bc187e7de = L.popup({"maxWidth": "100%"});
+
+        
+            var html_13873b4059004303aeb2219978af279b = $(`<div id="html_13873b4059004303aeb2219978af279b" style="width: 100.0%; height: 100.0%;">HARVARD BLACKSTONE STEAM PLANT</div>`)[0];
+            popup_d2fca55c6f47404d98fd4f4bc187e7de.setContent(html_13873b4059004303aeb2219978af279b);
+        
+
+        circle_marker_ff18c1dfa085425188f6d0d4039f86d4.bindPopup(popup_d2fca55c6f47404d98fd4f4bc187e7de)
+        ;
+
+        
+    
+    
+            var circle_marker_8897976c4f61400d9fe7024d2e01a7ce = L.circleMarker(
+                [42.059776, -71.515203],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_0a3f532beee249f38e7622f02988ddb2 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_288d599d6d9a4f4fba7f3c68755070ac = $(`<div id="html_288d599d6d9a4f4fba7f3c68755070ac" style="width: 100.0%; height: 100.0%;">ANP BLACKSTONE ENERGY GENERATING PLANT</div>`)[0];
+            popup_0a3f532beee249f38e7622f02988ddb2.setContent(html_288d599d6d9a4f4fba7f3c68755070ac);
+        
+
+        circle_marker_8897976c4f61400d9fe7024d2e01a7ce.bindPopup(popup_0a3f532beee249f38e7622f02988ddb2)
+        ;
+
+        
+    
+    
+            var circle_marker_35b3899daef8492d99ac94ab37b58e40 = L.circleMarker(
+                [42.533852, -71.845589],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_7c0eae3f47c140dcbd31250b852d5f1a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_255b26dbd2a948c0b16b0f4f22725742 = $(`<div id="html_255b26dbd2a948c0b16b0f4f22725742" style="width: 100.0%; height: 100.0%;">FITCHBURG WESTMINSTER LANDFILL RECYCLING</div>`)[0];
+            popup_7c0eae3f47c140dcbd31250b852d5f1a.setContent(html_255b26dbd2a948c0b16b0f4f22725742);
+        
+
+        circle_marker_35b3899daef8492d99ac94ab37b58e40.bindPopup(popup_7c0eae3f47c140dcbd31250b852d5f1a)
+        ;
+
+        
+    
+    
+            var circle_marker_8107e5598aa547fe864c457ca1dc21f2 = L.circleMarker(
+                [42.726075, -71.122203],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_5cb9999418fa4d9d832a05263e4a6562 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1f220023eff343b3a96561b75426cd68 = $(`<div id="html_1f220023eff343b3a96561b75426cd68" style="width: 100.0%; height: 100.0%;">NESWC RESOURCE RECOVERY FACILITY</div>`)[0];
+            popup_5cb9999418fa4d9d832a05263e4a6562.setContent(html_1f220023eff343b3a96561b75426cd68);
+        
+
+        circle_marker_8107e5598aa547fe864c457ca1dc21f2.bindPopup(popup_5cb9999418fa4d9d832a05263e4a6562)
+        ;
+
+        
+    
+    
+            var circle_marker_2c134d55a1c74dce825feb32f44048ef = L.circleMarker(
+                [42.36429, -71.1148],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_f500e89db9c645a6a51b8424cec57970 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_cf1d4ce512a1483889495873bce6810e = $(`<div id="html_cf1d4ce512a1483889495873bce6810e" style="width: 100.0%; height: 100.0%;">HARVARD BLACKSTONE STEAM PLANT</div>`)[0];
+            popup_f500e89db9c645a6a51b8424cec57970.setContent(html_cf1d4ce512a1483889495873bce6810e);
+        
+
+        circle_marker_2c134d55a1c74dce825feb32f44048ef.bindPopup(popup_f500e89db9c645a6a51b8424cec57970)
+        ;
+
+        
+    
+    
+            var circle_marker_c3e0debff72c4ef68121924f685f5484 = L.circleMarker(
+                [42.560572, -71.84962900000002],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_50d381c7f1924ee2997ba16d564a4b0c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0b115b18a5e44c5b80fa93896fada539 = $(`<div id="html_0b115b18a5e44c5b80fa93896fada539" style="width: 100.0%; height: 100.0%;">NEWARK AMERICA PAPERBOARD MILL</div>`)[0];
+            popup_50d381c7f1924ee2997ba16d564a4b0c.setContent(html_0b115b18a5e44c5b80fa93896fada539);
+        
+
+        circle_marker_c3e0debff72c4ef68121924f685f5484.bindPopup(popup_50d381c7f1924ee2997ba16d564a4b0c)
+        ;
+
+        
+    
+    
+            var circle_marker_efabe1ef70f0487ebca876c5ae003ae6 = L.circleMarker(
+                [42.20446, -71.15937],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_dd7d690d415c4bc69a1a835ddd2adf87 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c030bb3882d544e39d6ad78980928b26 = $(`<div id="html_c030bb3882d544e39d6ad78980928b26" style="width: 100.0%; height: 100.0%;">NSTAR DBA EVERSOURCE ENERGY</div>`)[0];
+            popup_dd7d690d415c4bc69a1a835ddd2adf87.setContent(html_c030bb3882d544e39d6ad78980928b26);
+        
+
+        circle_marker_efabe1ef70f0487ebca876c5ae003ae6.bindPopup(popup_dd7d690d415c4bc69a1a835ddd2adf87)
+        ;
+
+        
+    
+    
+            var circle_marker_61c28210c95f46fba13d49f9311539ed = L.circleMarker(
+                [41.812778, -70.719444],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_54c6fbbc3fee4e57891e4f23bb360f29 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_99ab0361e5664005ab82204d2d5b58ef = $(`<div id="html_99ab0361e5664005ab82204d2d5b58ef" style="width: 100.0%; height: 100.0%;">CARVER-MARION-WAREHAM LANDFILL</div>`)[0];
+            popup_54c6fbbc3fee4e57891e4f23bb360f29.setContent(html_99ab0361e5664005ab82204d2d5b58ef);
+        
+
+        circle_marker_61c28210c95f46fba13d49f9311539ed.bindPopup(popup_54c6fbbc3fee4e57891e4f23bb360f29)
+        ;
+
+        
+    
+    
+            var circle_marker_aa32cc7683f44c56ac62ac9c9ee05c09 = L.circleMarker(
+                [42.45488, -73.21734000000002],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_e2f8d0601e5f47df8f33661b185f16f0 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_68e3f69f9c624074886a0692739ffc46 = $(`<div id="html_68e3f69f9c624074886a0692739ffc46" style="width: 100.0%; height: 100.0%;">PITTSFIELD GENERATING POWER PLANT</div>`)[0];
+            popup_e2f8d0601e5f47df8f33661b185f16f0.setContent(html_68e3f69f9c624074886a0692739ffc46);
+        
+
+        circle_marker_aa32cc7683f44c56ac62ac9c9ee05c09.bindPopup(popup_e2f8d0601e5f47df8f33661b185f16f0)
+        ;
+
+        
+    
+    
+            var circle_marker_71803c437b7c462483acd6f6df54cc15 = L.circleMarker(
+                [42.16711, -72.54245999999998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_846107800bda41c186565b0e700292b7 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1565475b13d34f9994f4ec405709f87e = $(`<div id="html_1565475b13d34f9994f4ec405709f87e" style="width: 100.0%; height: 100.0%;">CHICOPEE SANITARY LANDFILL</div>`)[0];
+            popup_846107800bda41c186565b0e700292b7.setContent(html_1565475b13d34f9994f4ec405709f87e);
+        
+
+        circle_marker_71803c437b7c462483acd6f6df54cc15.bindPopup(popup_846107800bda41c186565b0e700292b7)
+        ;
+
+        
+    
+    
+            var circle_marker_eb9cf5179d7e4695b4b906d617055da3 = L.circleMarker(
+                [42.139997, -71.446348],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_69cb8bb8b58c4c46b779232674364668 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e641225abf1a42b19b7c588e4222854e = $(`<div id="html_e641225abf1a42b19b7c588e4222854e" style="width: 100.0%; height: 100.0%;">EXELON WEST MEDWAY GENERATING STATION</div>`)[0];
+            popup_69cb8bb8b58c4c46b779232674364668.setContent(html_e641225abf1a42b19b7c588e4222854e);
+        
+
+        circle_marker_eb9cf5179d7e4695b4b906d617055da3.bindPopup(popup_69cb8bb8b58c4c46b779232674364668)
+        ;
+
+        
+    
+    
+            var circle_marker_4d3de5b4bd3a415c9a2a5576ce4a484b = L.circleMarker(
+                [42.2207, -71.7673],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_8a70a27f51064fb493e6a8e0c52825c1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6f5f8b8dffbe4aa1a43d32815b6d42e6 = $(`<div id="html_6f5f8b8dffbe4aa1a43d32815b6d42e6" style="width: 100.0%; height: 100.0%;">MILLBURY RESOURCE RECOVERY FACILITY</div>`)[0];
+            popup_8a70a27f51064fb493e6a8e0c52825c1.setContent(html_6f5f8b8dffbe4aa1a43d32815b6d42e6);
+        
+
+        circle_marker_4d3de5b4bd3a415c9a2a5576ce4a484b.bindPopup(popup_8a70a27f51064fb493e6a8e0c52825c1)
+        ;
+
+        
+    
+    
+            var circle_marker_fcf0e042f3274f9a98d11a8ac5873d52 = L.circleMarker(
+                [42.07804, -71.50657],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_651d606f78464deb853e55bf634c54d2 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_7225998a138e4631a74e31ce3bb3de7c = $(`<div id="html_7225998a138e4631a74e31ce3bb3de7c" style="width: 100.0%; height: 100.0%;">TENNESSEE GAS PIPELINE</div>`)[0];
+            popup_651d606f78464deb853e55bf634c54d2.setContent(html_7225998a138e4631a74e31ce3bb3de7c);
+        
+
+        circle_marker_fcf0e042f3274f9a98d11a8ac5873d52.bindPopup(popup_651d606f78464deb853e55bf634c54d2)
+        ;
+
+        
+    
+    
+            var circle_marker_40abe1801b7d4269a82cd46db495f8f4 = L.circleMarker(
+                [42.235, -70.966734],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_0f1ceb8b5af147c486a55aace3987076 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_8a5b78689c604f72b8e7f3a6dc0e25b1 = $(`<div id="html_8a5b78689c604f72b8e7f3a6dc0e25b1" style="width: 100.0%; height: 100.0%;">BRAINTREE ELECTRIC POTTER GENERATING STATION</div>`)[0];
+            popup_0f1ceb8b5af147c486a55aace3987076.setContent(html_8a5b78689c604f72b8e7f3a6dc0e25b1);
+        
+
+        circle_marker_40abe1801b7d4269a82cd46db495f8f4.bindPopup(popup_0f1ceb8b5af147c486a55aace3987076)
+        ;
+
+        
+    
+    
+            var circle_marker_ea40b1fe5e1f4275b9bcf3c73e402936 = L.circleMarker(
+                [42.37938, -71.55696],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_9a77a12f6c8e4492a299bc6bf933e3fb = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ed8c0e45f9f7467697558a9e1b7e48ca = $(`<div id="html_ed8c0e45f9f7467697558a9e1b7e48ca" style="width: 100.0%; height: 100.0%;">INTEL FAB 17 SEMICONDUCTOR MANUFACTURING</div>`)[0];
+            popup_9a77a12f6c8e4492a299bc6bf933e3fb.setContent(html_ed8c0e45f9f7467697558a9e1b7e48ca);
+        
+
+        circle_marker_ea40b1fe5e1f4275b9bcf3c73e402936.bindPopup(popup_9a77a12f6c8e4492a299bc6bf933e3fb)
+        ;
+
+        
+    
+    
+            var circle_marker_0c19bb96478147c88e1fd23701ed907b = L.circleMarker(
+                [42.093255, -71.48161],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_5c0d844be77d4de98c77748245439191 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ac5e9a38604d43d699556cfa26d94691 = $(`<div id="html_ac5e9a38604d43d699556cfa26d94691" style="width: 100.0%; height: 100.0%;">BELLINGHAM COGENERATION FACILITY</div>`)[0];
+            popup_5c0d844be77d4de98c77748245439191.setContent(html_ac5e9a38604d43d699556cfa26d94691);
+        
+
+        circle_marker_0c19bb96478147c88e1fd23701ed907b.bindPopup(popup_5c0d844be77d4de98c77748245439191)
+        ;
+
+        
+    
+    
+            var circle_marker_749be4797342453983ef7871d27350a4 = L.circleMarker(
+                [41.70285, -71.16311999999998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_5a0287b8b08f4c5c9b8bf6096866aa08 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_67457214a04448249f51d9ce4db6c73f = $(`<div id="html_67457214a04448249f51d9ce4db6c73f" style="width: 100.0%; height: 100.0%;">NEW ENGLAND GAS</div>`)[0];
+            popup_5a0287b8b08f4c5c9b8bf6096866aa08.setContent(html_67457214a04448249f51d9ce4db6c73f);
+        
+
+        circle_marker_749be4797342453983ef7871d27350a4.bindPopup(popup_5a0287b8b08f4c5c9b8bf6096866aa08)
+        ;
+
+        
+    
+    
+            var circle_marker_16634d79fe7e4fa5b27ea8ee39e65630 = L.circleMarker(
+                [42.156979, -72.522369],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_6e57ac76e8ca49f0b1df3c17644707b6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0d70771bd7e44c569fcd1e6078e43fdf = $(`<div id="html_0d70771bd7e44c569fcd1e6078e43fdf" style="width: 100.0%; height: 100.0%;">MASSPOWER COGENERATION FACILITY</div>`)[0];
+            popup_6e57ac76e8ca49f0b1df3c17644707b6.setContent(html_0d70771bd7e44c569fcd1e6078e43fdf);
+        
+
+        circle_marker_16634d79fe7e4fa5b27ea8ee39e65630.bindPopup(popup_6e57ac76e8ca49f0b1df3c17644707b6)
+        ;
+
+        
+    
+    
+            var circle_marker_48d548588b6d40c59d3e92479a9eeeee = L.circleMarker(
+                [42.277914, -71.173505],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_8039b966172745d49b264c506e182fd9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f62f0a1594494eff975dda057f46ff5f = $(`<div id="html_f62f0a1594494eff975dda057f46ff5f" style="width: 100.0%; height: 100.0%;">GARDNER STREET LANDFILL</div>`)[0];
+            popup_8039b966172745d49b264c506e182fd9.setContent(html_f62f0a1594494eff975dda057f46ff5f);
+        
+
+        circle_marker_48d548588b6d40c59d3e92479a9eeeee.bindPopup(popup_8039b966172745d49b264c506e182fd9)
+        ;
+
+        
+    
+    
+            var circle_marker_6895fcde14314e4e809b453e3bc6ec40 = L.circleMarker(
+                [41.709989, -71.192441],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_e625bfb853bf484e81da62eae53012cb = L.popup({"maxWidth": "100%"});
+
+        
+            var html_75b984f4439e4297b8163cc7e128baa4 = $(`<div id="html_75b984f4439e4297b8163cc7e128baa4" style="width: 100.0%; height: 100.0%;">DOMINION ENERGY BRAYTON POINT POWER PLANT</div>`)[0];
+            popup_e625bfb853bf484e81da62eae53012cb.setContent(html_75b984f4439e4297b8163cc7e128baa4);
+        
+
+        circle_marker_6895fcde14314e4e809b453e3bc6ec40.bindPopup(popup_e625bfb853bf484e81da62eae53012cb)
+        ;
+
+        
+    
+    
+            var circle_marker_c012c4de06e14412a3539b55e08a63d8 = L.circleMarker(
+                [42.61413, -71.16951999999998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_e1fe455602ab41c4bdb3cc96d8afe076 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3fd98c3181c0433abc9e8dc242b87847 = $(`<div id="html_3fd98c3181c0433abc9e8dc242b87847" style="width: 100.0%; height: 100.0%;">PFIZER RESEARCH</div>`)[0];
+            popup_e1fe455602ab41c4bdb3cc96d8afe076.setContent(html_3fd98c3181c0433abc9e8dc242b87847);
+        
+
+        circle_marker_c012c4de06e14412a3539b55e08a63d8.bindPopup(popup_e1fe455602ab41c4bdb3cc96d8afe076)
+        ;
+
+        
+    
+    
+            var circle_marker_17f8b1f15b814dd697efd0eab3235a31 = L.circleMarker(
+                [42.5872, -72.0247],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_69c2156ca8c94957bcfb994029fa83f4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_de71bb91a42648a09a178babfb66564f = $(`<div id="html_de71bb91a42648a09a178babfb66564f" style="width: 100.0%; height: 100.0%;">GARDNER LANDFILL</div>`)[0];
+            popup_69c2156ca8c94957bcfb994029fa83f4.setContent(html_de71bb91a42648a09a178babfb66564f);
+        
+
+        circle_marker_17f8b1f15b814dd697efd0eab3235a31.bindPopup(popup_69c2156ca8c94957bcfb994029fa83f4)
+        ;
+
+        
+    
+    
+            var circle_marker_6798779da85045df94687768647852c3 = L.circleMarker(
+                [42.452603, -70.97343599999998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_ea18e14cbbf641bdb994b86bf87e444b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_88b063e22b524eea9aafe91db630ec58 = $(`<div id="html_88b063e22b524eea9aafe91db630ec58" style="width: 100.0%; height: 100.0%;">GE AVIATION</div>`)[0];
+            popup_ea18e14cbbf641bdb994b86bf87e444b.setContent(html_88b063e22b524eea9aafe91db630ec58);
+        
+
+        circle_marker_6798779da85045df94687768647852c3.bindPopup(popup_ea18e14cbbf641bdb994b86bf87e444b)
+        ;
+
+        
+    
+    
+            var circle_marker_23063c995dfb4ae681e93bb5ae57b57d = L.circleMarker(
+                [42.229565, -71.727977],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_2850fee2a5ea4d96aed9b2189da709cd = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b924fb96aa214de6a184528b84f3d990 = $(`<div id="html_b924fb96aa214de6a184528b84f3d990" style="width: 100.0%; height: 100.0%;">WYMAN GORDON PLANT</div>`)[0];
+            popup_2850fee2a5ea4d96aed9b2189da709cd.setContent(html_b924fb96aa214de6a184528b84f3d990);
+        
+
+        circle_marker_23063c995dfb4ae681e93bb5ae57b57d.bindPopup(popup_2850fee2a5ea4d96aed9b2189da709cd)
+        ;
+
+        
+    
+    
+            var circle_marker_a78ef9e9e4ea48ea9e49e6f32fc1d79c = L.circleMarker(
+                [41.7524, -71.1052],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_21044106801c4cceb80d6d6100cd72ff = L.popup({"maxWidth": "100%"});
+
+        
+            var html_46900ee74bfb420f8f6374e1af5d5a64 = $(`<div id="html_46900ee74bfb420f8f6374e1af5d5a64" style="width: 100.0%; height: 100.0%;">FALL RIVER LANDFILL</div>`)[0];
+            popup_21044106801c4cceb80d6d6100cd72ff.setContent(html_46900ee74bfb420f8f6374e1af5d5a64);
+        
+
+        circle_marker_a78ef9e9e4ea48ea9e49e6f32fc1d79c.bindPopup(popup_21044106801c4cceb80d6d6100cd72ff)
+        ;
+
+        
+    
+    
+            var circle_marker_0470aee9a9a84b8da570e05dc565ab68 = L.circleMarker(
+                [42.337948, -71.09044300000002],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_1bd82f621b54408ca0a481f48063049b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_bd8d25314dd447448fd4a816fdc0aae3 = $(`<div id="html_bd8d25314dd447448fd4a816fdc0aae3" style="width: 100.0%; height: 100.0%;">NORTHEASTERN UNIVERSITY POWER PLANT</div>`)[0];
+            popup_1bd82f621b54408ca0a481f48063049b.setContent(html_bd8d25314dd447448fd4a816fdc0aae3);
+        
+
+        circle_marker_0470aee9a9a84b8da570e05dc565ab68.bindPopup(popup_1bd82f621b54408ca0a481f48063049b)
+        ;
+
+        
+    
+    
+            var circle_marker_ce83d128ab56456db5f094cf5f0fb702 = L.circleMarker(
+                [41.92843, -70.83454],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_2b5ab0701d3047aab474b9bd81a47148 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f1c6484e3ee441ef966096371f6bcef7 = $(`<div id="html_f1c6484e3ee441ef966096371f6bcef7" style="width: 100.0%; height: 100.0%;">MIDDLEBOROUGH LANDFILL & TRAN</div>`)[0];
+            popup_2b5ab0701d3047aab474b9bd81a47148.setContent(html_f1c6484e3ee441ef966096371f6bcef7);
+        
+
+        circle_marker_ce83d128ab56456db5f094cf5f0fb702.bindPopup(popup_2b5ab0701d3047aab474b9bd81a47148)
+        ;
+
+        
+    
+    
+            var circle_marker_49afc1fdf292488e80d241497ca81fb0 = L.circleMarker(
+                [42.34863, -71.08273],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_549d550b6d7148e48d7123bb02e27e30 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_03e4e44031dc418ca63200f2e9507f23 = $(`<div id="html_03e4e44031dc418ca63200f2e9507f23" style="width: 100.0%; height: 100.0%;">PRUDENTIAL CENTER</div>`)[0];
+            popup_549d550b6d7148e48d7123bb02e27e30.setContent(html_03e4e44031dc418ca63200f2e9507f23);
+        
+
+        circle_marker_49afc1fdf292488e80d241497ca81fb0.bindPopup(popup_549d550b6d7148e48d7123bb02e27e30)
+        ;
+
+        
+    
+    
+            var circle_marker_83a073b92a2b46e99a8876410779b7a5 = L.circleMarker(
+                [42.227281, -72.547189],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_d4b661b6cff64e3eb29d111a1a113b8c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_62775d94a2eb46bb9cc8ae8cdf36694b = $(`<div id="html_62775d94a2eb46bb9cc8ae8cdf36694b" style="width: 100.0%; height: 100.0%;">HOLYOKE SANITARY LANDFILL</div>`)[0];
+            popup_d4b661b6cff64e3eb29d111a1a113b8c.setContent(html_62775d94a2eb46bb9cc8ae8cdf36694b);
+        
+
+        circle_marker_83a073b92a2b46e99a8876410779b7a5.bindPopup(popup_d4b661b6cff64e3eb29d111a1a113b8c)
+        ;
+
+        
+    
+    
+            var circle_marker_e0df094abf5d42c6ad1c830879bc7047 = L.circleMarker(
+                [42.09104, -72.59748],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_85610e68ac9f46cd8428844ca9c77dce = L.popup({"maxWidth": "100%"});
+
+        
+            var html_05d4fe1357d54b83851824a82f251d4d = $(`<div id="html_05d4fe1357d54b83851824a82f251d4d" style="width: 100.0%; height: 100.0%;">BONDIS ISLAND LANDFILL</div>`)[0];
+            popup_85610e68ac9f46cd8428844ca9c77dce.setContent(html_05d4fe1357d54b83851824a82f251d4d);
+        
+
+        circle_marker_e0df094abf5d42c6ad1c830879bc7047.bindPopup(popup_85610e68ac9f46cd8428844ca9c77dce)
+        ;
+
+        
+    
+    
+            var circle_marker_557c5929b5764691b9f493a213a42bb3 = L.circleMarker(
+                [42.336667, -71.108333],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_30c6a7c201a24fc79ee4d6fb7bd88c88 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_57fb17d0fcdc426abc4a28cd600c82d7 = $(`<div id="html_57fb17d0fcdc426abc4a28cd600c82d7" style="width: 100.0%; height: 100.0%;">MEDICAL AREA TOTAL ENERGY PLANT</div>`)[0];
+            popup_30c6a7c201a24fc79ee4d6fb7bd88c88.setContent(html_57fb17d0fcdc426abc4a28cd600c82d7);
+        
+
+        circle_marker_557c5929b5764691b9f493a213a42bb3.bindPopup(popup_30c6a7c201a24fc79ee4d6fb7bd88c88)
+        ;
+
+        
+    
+    
+            var circle_marker_eac6aa7c68b54a9d9d7257376e61aa62 = L.circleMarker(
+                [42.396463, -71.271237],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_a74115bd888346e09e9909f74b718771 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3ffd6d9428274c3394c1787caa12450e = $(`<div id="html_3ffd6d9428274c3394c1787caa12450e" style="width: 100.0%; height: 100.0%;">NATIONAL GRID CORPORATE HEADQUARTERS</div>`)[0];
+            popup_a74115bd888346e09e9909f74b718771.setContent(html_3ffd6d9428274c3394c1787caa12450e);
+        
+
+        circle_marker_eac6aa7c68b54a9d9d7257376e61aa62.bindPopup(popup_a74115bd888346e09e9909f74b718771)
+        ;
+
+        
+    
+    
+            var circle_marker_78c4f5734f9349069e1164f0b3e8b746 = L.circleMarker(
+                [42.2806, -72.6054],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_25b61cdb46254f2492cf2d6a86bce622 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e0a69c71c898447ba1c040f3be4b286c = $(`<div id="html_e0a69c71c898447ba1c040f3be4b286c" style="width: 100.0%; height: 100.0%;">HOLYOKE WATER POWER MOUNT TOM STATION</div>`)[0];
+            popup_25b61cdb46254f2492cf2d6a86bce622.setContent(html_e0a69c71c898447ba1c040f3be4b286c);
+        
+
+        circle_marker_78c4f5734f9349069e1164f0b3e8b746.bindPopup(popup_25b61cdb46254f2492cf2d6a86bce622)
+        ;
+
+        
+    
+    
+            var circle_marker_039a7ae2990c4757bfaa73682c61cc57 = L.circleMarker(
+                [42.477336, -71.115135],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_a6eb956778f84b9aa46c1c590c405359 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_107932bb36764ae198b67497e8cb6bd3 = $(`<div id="html_107932bb36764ae198b67497e8cb6bd3" style="width: 100.0%; height: 100.0%;">KRAFT ATLANTIC GELATIN PLANT</div>`)[0];
+            popup_a6eb956778f84b9aa46c1c590c405359.setContent(html_107932bb36764ae198b67497e8cb6bd3);
+        
+
+        circle_marker_039a7ae2990c4757bfaa73682c61cc57.bindPopup(popup_a6eb956778f84b9aa46c1c590c405359)
+        ;
+
+        
+    
+    
+            var circle_marker_99982c25641c404f9bb9bbc02b0288c3 = L.circleMarker(
+                [42.154981, -72.52641899999998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_3ab79b90a565450984c98a9e303d1cb0 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_df0d4cd4074d4ab5a1e22d1b8462b015 = $(`<div id="html_df0d4cd4074d4ab5a1e22d1b8462b015" style="width: 100.0%; height: 100.0%;">SOLUTIA CHEMICAL MANUFACTURING PLANT</div>`)[0];
+            popup_3ab79b90a565450984c98a9e303d1cb0.setContent(html_df0d4cd4074d4ab5a1e22d1b8462b015);
+        
+
+        circle_marker_99982c25641c404f9bb9bbc02b0288c3.bindPopup(popup_3ab79b90a565450984c98a9e303d1cb0)
+        ;
+
+        
+    
+    
+            var circle_marker_369b603cfb654d61a07b9599b9ae289a = L.circleMarker(
+                [41.92299000000001, -71.086477],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_f184cab91e354c0d983f39dc7e65db45 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_fe0e9546027e45628cdb41cc7c039be3 = $(`<div id="html_fe0e9546027e45628cdb41cc7c039be3" style="width: 100.0%; height: 100.0%;">TAUNTON LANDFILL & GAS ENERGY RECOVERY</div>`)[0];
+            popup_f184cab91e354c0d983f39dc7e65db45.setContent(html_fe0e9546027e45628cdb41cc7c039be3);
+        
+
+        circle_marker_369b603cfb654d61a07b9599b9ae289a.bindPopup(popup_f184cab91e354c0d983f39dc7e65db45)
+        ;
+
+        
+    
+    
+            var circle_marker_3fcafedede9942b0a3dffd541bd9190a = L.circleMarker(
+                [42.35395, -71.12204],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_8b6c675fcae5488b87c52e0bff33e225 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6ef9a0be9d5d4ca3953a3a81dc6b488a = $(`<div id="html_6ef9a0be9d5d4ca3953a3a81dc6b488a" style="width: 100.0%; height: 100.0%;">BOSTON UNIVERSITY PHYSICAL PLANT</div>`)[0];
+            popup_8b6c675fcae5488b87c52e0bff33e225.setContent(html_6ef9a0be9d5d4ca3953a3a81dc6b488a);
+        
+
+        circle_marker_3fcafedede9942b0a3dffd541bd9190a.bindPopup(popup_8b6c675fcae5488b87c52e0bff33e225)
+        ;
+
+        
+    
+    
+            var circle_marker_dc4600fa95ce4bc19be5ea166f470eb8 = L.circleMarker(
+                [42.09661, -72.59743],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_0809d745fb834a8684db509de8aea974 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_214977a5e2764fe6a65c95b194626386 = $(`<div id="html_214977a5e2764fe6a65c95b194626386" style="width: 100.0%; height: 100.0%;">ESSENTIAL POWER MASSACHUSETTS LLC</div>`)[0];
+            popup_0809d745fb834a8684db509de8aea974.setContent(html_214977a5e2764fe6a65c95b194626386);
+        
+
+        circle_marker_dc4600fa95ce4bc19be5ea166f470eb8.bindPopup(popup_0809d745fb834a8684db509de8aea974)
+        ;
+
+        
+    
+    
+            var circle_marker_f1a5f6e2a8974eb999452bd61f2efadc = L.circleMarker(
+                [42.7654, -71.124025],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_99d0d965a0b649b3aa9729fb2cd81a8c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_4d93fde034b946a1b80cbbeec24e858d = $(`<div id="html_4d93fde034b946a1b80cbbeec24e858d" style="width: 100.0%; height: 100.0%;">COVANTA RESOURCE RECOVERY FACILITY</div>`)[0];
+            popup_99d0d965a0b649b3aa9729fb2cd81a8c.setContent(html_4d93fde034b946a1b80cbbeec24e858d);
+        
+
+        circle_marker_f1a5f6e2a8974eb999452bd61f2efadc.bindPopup(popup_99d0d965a0b649b3aa9729fb2cd81a8c)
+        ;
+
+        
+    
+    
+            var circle_marker_c7e35b6c18fb4edf89bf55a6cb9444f0 = L.circleMarker(
+                [42.109971, -71.452954],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_1affd8feb58445c0be67d44bbc61d5b3 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_460398470c244fa4b4a61686f721ed02 = $(`<div id="html_460398470c244fa4b4a61686f721ed02" style="width: 100.0%; height: 100.0%;">ANP BELLINGHAM POWER PLANT</div>`)[0];
+            popup_1affd8feb58445c0be67d44bbc61d5b3.setContent(html_460398470c244fa4b4a61686f721ed02);
+        
+
+        circle_marker_c7e35b6c18fb4edf89bf55a6cb9444f0.bindPopup(popup_1affd8feb58445c0be67d44bbc61d5b3)
+        ;
+
+        
+    
+    
+            var circle_marker_90fadaf05725404cb175f6820c7b239d = L.circleMarker(
+                [42.27863, -71.759025],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_1b34d660e9e547bab72c2beab580773f = L.popup({"maxWidth": "100%"});
+
+        
+            var html_862e343803824d219e45aa51a35934e9 = $(`<div id="html_862e343803824d219e45aa51a35934e9" style="width: 100.0%; height: 100.0%;">UNIVERSITY OF MASSACHUSETTS MEDICAL SCHOOL</div>`)[0];
+            popup_1b34d660e9e547bab72c2beab580773f.setContent(html_862e343803824d219e45aa51a35934e9);
+        
+
+        circle_marker_90fadaf05725404cb175f6820c7b239d.bindPopup(popup_1b34d660e9e547bab72c2beab580773f)
+        ;
+
+        
+    
+    
+            var circle_marker_43a7a0c6011647bd8b2796588ca0a4cc = L.circleMarker(
+                [42.3905, -71.0673],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_8876417f14ee4c569ef8a390160f5829 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_641db95ff74d4bad8905326d8cfd1782 = $(`<div id="html_641db95ff74d4bad8905326d8cfd1782" style="width: 100.0%; height: 100.0%;">CONSTELLATION MYSTIC GENERATING STATION</div>`)[0];
+            popup_8876417f14ee4c569ef8a390160f5829.setContent(html_641db95ff74d4bad8905326d8cfd1782);
+        
+
+        circle_marker_43a7a0c6011647bd8b2796588ca0a4cc.bindPopup(popup_8876417f14ee4c569ef8a390160f5829)
+        ;
+
+        
+    
+    
+            var circle_marker_75339195ea1a4ba78bdbd7f7f20826fc = L.circleMarker(
+                [42.21993, -72.55686999999998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_eabe0d013cda4fa083ea2559b5ebe3a1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_187763fbda244e5880822fbbb3eb2f4c = $(`<div id="html_187763fbda244e5880822fbbb3eb2f4c" style="width: 100.0%; height: 100.0%;">SOUTH HADLEY LANDFILL & RECYCLING CTR</div>`)[0];
+            popup_eabe0d013cda4fa083ea2559b5ebe3a1.setContent(html_187763fbda244e5880822fbbb3eb2f4c);
+        
+
+        circle_marker_75339195ea1a4ba78bdbd7f7f20826fc.bindPopup(popup_eabe0d013cda4fa083ea2559b5ebe3a1)
+        ;
+
+        
+    
+    
+            var circle_marker_b51258712c974285a0234abec9d0abcf = L.circleMarker(
+                [42.396463, -71.271237],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_7ad6eb69deb04d41a0ce6a799e0c77fd = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5557fdc6d7854ce087edf25c1325ca3e = $(`<div id="html_5557fdc6d7854ce087edf25c1325ca3e" style="width: 100.0%; height: 100.0%;">NATIONAL GRID CORPORATE HEADQUARTERS</div>`)[0];
+            popup_7ad6eb69deb04d41a0ce6a799e0c77fd.setContent(html_5557fdc6d7854ce087edf25c1325ca3e);
+        
+
+        circle_marker_b51258712c974285a0234abec9d0abcf.bindPopup(popup_7ad6eb69deb04d41a0ce6a799e0c77fd)
+        ;
+
+        
+    
+    
+            var circle_marker_13844fdabbfe4fc9b4cb110a185bd214 = L.circleMarker(
+                [42.180149, -71.076812],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_491fb73d625447ae9fc49e2b95d0c005 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_472e26a4c9254a56aa6fb8a82441ea4a = $(`<div id="html_472e26a4c9254a56aa6fb8a82441ea4a" style="width: 100.0%; height: 100.0%;">BFI RANDOLPH LANDFILL</div>`)[0];
+            popup_491fb73d625447ae9fc49e2b95d0c005.setContent(html_472e26a4c9254a56aa6fb8a82441ea4a);
+        
+
+        circle_marker_13844fdabbfe4fc9b4cb110a185bd214.bindPopup(popup_491fb73d625447ae9fc49e2b95d0c005)
+        ;
+
+        
+    
+    
+            var circle_marker_111db11cfcba4336b566eff96547be08 = L.circleMarker(
+                [42.393109, -71.064636],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_7efa7c8af2b64b6999f5615948bd120a = L.popup({"maxWidth": "100%"});
+
+        
+            var html_08f0393e14d749a2a9a5668df9ab4fdf = $(`<div id="html_08f0393e14d749a2a9a5668df9ab4fdf" style="width: 100.0%; height: 100.0%;">DISTRIGAS LNG FACILITY</div>`)[0];
+            popup_7efa7c8af2b64b6999f5615948bd120a.setContent(html_08f0393e14d749a2a9a5668df9ab4fdf);
+        
+
+        circle_marker_111db11cfcba4336b566eff96547be08.bindPopup(popup_7efa7c8af2b64b6999f5615948bd120a)
+        ;
+
+        
+    
+    
+            var circle_marker_0164845d3642451ebbdfc8bf25102861 = L.circleMarker(
+                [42.64014, -71.32247],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_33e02bda989e43b090ca6ddae25c4360 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c228b09afa85416b9070a306560fb097 = $(`<div id="html_c228b09afa85416b9070a306560fb097" style="width: 100.0%; height: 100.0%;">LOWELL COGENERATION PLANT</div>`)[0];
+            popup_33e02bda989e43b090ca6ddae25c4360.setContent(html_c228b09afa85416b9070a306560fb097);
+        
+
+        circle_marker_0164845d3642451ebbdfc8bf25102861.bindPopup(popup_33e02bda989e43b090ca6ddae25c4360)
+        ;
+
+        
+    
+    
+            var circle_marker_44a27f86007740f5bad3ae346b55efa1 = L.circleMarker(
+                [42.470666, -71.28944399999997],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_3478af70e5b1464692fa585909da5f16 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3a4bbbc122c641c5bfd6b1c03490c5b8 = $(`<div id="html_3a4bbbc122c641c5bfd6b1c03490c5b8" style="width: 100.0%; height: 100.0%;">HANSCOM AIR FORCE BASE</div>`)[0];
+            popup_3478af70e5b1464692fa585909da5f16.setContent(html_3a4bbbc122c641c5bfd6b1c03490c5b8);
+        
+
+        circle_marker_44a27f86007740f5bad3ae346b55efa1.bindPopup(popup_3478af70e5b1464692fa585909da5f16)
+        ;
+
+        
+    
+    
+            var circle_marker_838f8153e4764a7b91957b1cc4bf0360 = L.circleMarker(
+                [42.36812000000001, -71.00941],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_16914d8a7b5d42d6a3ecb95ed33133fc = L.popup({"maxWidth": "100%"});
+
+        
+            var html_5290b82cc2674a2eb5e903d1eb80f57c = $(`<div id="html_5290b82cc2674a2eb5e903d1eb80f57c" style="width: 100.0%; height: 100.0%;">LOGAN INTERNATIONAL AIRPORT</div>`)[0];
+            popup_16914d8a7b5d42d6a3ecb95ed33133fc.setContent(html_5290b82cc2674a2eb5e903d1eb80f57c);
+        
+
+        circle_marker_838f8153e4764a7b91957b1cc4bf0360.bindPopup(popup_16914d8a7b5d42d6a3ecb95ed33133fc)
+        ;
+
+        
+    
+    
+            var circle_marker_63cf2cf04ab14de298c192acfd97fb23 = L.circleMarker(
+                [42.364376, -71.088229],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_5b78fb1cb7884d358138a88a275ab892 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_6b4306e3fda942569b1e5d9188d2c055 = $(`<div id="html_6b4306e3fda942569b1e5d9188d2c055" style="width: 100.0%; height: 100.0%;">BIOGEN IDEC</div>`)[0];
+            popup_5b78fb1cb7884d358138a88a275ab892.setContent(html_6b4306e3fda942569b1e5d9188d2c055);
+        
+
+        circle_marker_63cf2cf04ab14de298c192acfd97fb23.bindPopup(popup_5b78fb1cb7884d358138a88a275ab892)
+        ;
+
+        
+    
+    
+            var circle_marker_4ef2b8b01e1d4b1b8138a65d53b245f2 = L.circleMarker(
+                [42.5255, -70.877],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_d6bdb259c3314b78bea409041687918b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e4a68d41ddc642c4822952ecd595d3b0 = $(`<div id="html_e4a68d41ddc642c4822952ecd595d3b0" style="width: 100.0%; height: 100.0%;">SALEM HARBOR STATION</div>`)[0];
+            popup_d6bdb259c3314b78bea409041687918b.setContent(html_e4a68d41ddc642c4822952ecd595d3b0);
+        
+
+        circle_marker_4ef2b8b01e1d4b1b8138a65d53b245f2.bindPopup(popup_d6bdb259c3314b78bea409041687918b)
+        ;
+
+        
+    
+    
+            var circle_marker_0ff3776990e048bba6eedaaa4705e46e = L.circleMarker(
+                [41.831268, -71.12400500000003],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_5e34280c0880400f9ef3bfca631635f7 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c5dc2cebdddf4b1abae36e7d01623155 = $(`<div id="html_c5dc2cebdddf4b1abae36e7d01623155" style="width: 100.0%; height: 100.0%;">DIGHTON POWER PLANT</div>`)[0];
+            popup_5e34280c0880400f9ef3bfca631635f7.setContent(html_c5dc2cebdddf4b1abae36e7d01623155);
+        
+
+        circle_marker_0ff3776990e048bba6eedaaa4705e46e.bindPopup(popup_5e34280c0880400f9ef3bfca631635f7)
+        ;
+
+        
+    
+    
+            var circle_marker_0df7d3d5f9424a69a37140ef34f9c3c6 = L.circleMarker(
+                [41.67365, -70.9998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_76547e2f310b4d91af97222946ad5669 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d633e8ba8fc04929b57aabdbbcaba98b = $(`<div id="html_d633e8ba8fc04929b57aabdbbcaba98b" style="width: 100.0%; height: 100.0%;">DARTMOUTH POWER ASSOCATES</div>`)[0];
+            popup_76547e2f310b4d91af97222946ad5669.setContent(html_d633e8ba8fc04929b57aabdbbcaba98b);
+        
+
+        circle_marker_0df7d3d5f9424a69a37140ef34f9c3c6.bindPopup(popup_76547e2f310b4d91af97222946ad5669)
+        ;
+
+        
+    
+    
+            var circle_marker_c418b555ced24cc69747aa3d3139fbc1 = L.circleMarker(
+                [42.389978, -72.537008],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_6421fbdf06724f7ba7bd1a04944ede36 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_2bf5662c0349436eab754dff1301634b = $(`<div id="html_2bf5662c0349436eab754dff1301634b" style="width: 100.0%; height: 100.0%;">UMASS HEATING PLANT</div>`)[0];
+            popup_6421fbdf06724f7ba7bd1a04944ede36.setContent(html_2bf5662c0349436eab754dff1301634b);
+        
+
+        circle_marker_c418b555ced24cc69747aa3d3139fbc1.bindPopup(popup_6421fbdf06724f7ba7bd1a04944ede36)
+        ;
+
+        
+    
+    
+            var circle_marker_8f5f9a381539419bbfcb37608c476ffa = L.circleMarker(
+                [42.29593, -71.29893],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_9f5cacddbfcd432685bafa5aacf438aa = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b0d132afd0404071bcf24964fd004df3 = $(`<div id="html_b0d132afd0404071bcf24964fd004df3" style="width: 100.0%; height: 100.0%;">WELLESLEY COLLEGE</div>`)[0];
+            popup_9f5cacddbfcd432685bafa5aacf438aa.setContent(html_b0d132afd0404071bcf24964fd004df3);
+        
+
+        circle_marker_8f5f9a381539419bbfcb37608c476ffa.bindPopup(popup_9f5cacddbfcd432685bafa5aacf438aa)
+        ;
+
+        
+    
+    
+            var circle_marker_3839f41abc5d409cad2bfdd956659045 = L.circleMarker(
+                [42.3505, -70.9569],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_988d8b1ba7e440bc90d65e8ebff0b680 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e79fba97c8e540ecbbc4c5724cb07d73 = $(`<div id="html_e79fba97c8e540ecbbc4c5724cb07d73" style="width: 100.0%; height: 100.0%;">DEER ISLAND WASTEWATER TREATMENT FACILITY</div>`)[0];
+            popup_988d8b1ba7e440bc90d65e8ebff0b680.setContent(html_e79fba97c8e540ecbbc4c5724cb07d73);
+        
+
+        circle_marker_3839f41abc5d409cad2bfdd956659045.bindPopup(popup_988d8b1ba7e440bc90d65e8ebff0b680)
+        ;
+
+        
+    
+    
+            var circle_marker_14f8be8f893d4581b001741eae1849d6 = L.circleMarker(
+                [41.865217, -71.10597],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_6fe14edcaf8b4b349d8886e928d794f1 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_41cc532dca5b4c548e3a7fe264948e48 = $(`<div id="html_41cc532dca5b4c548e3a7fe264948e48" style="width: 100.0%; height: 100.0%;">TAUNTON MUNICIPAL LIGHTING CLEARY PLANT</div>`)[0];
+            popup_6fe14edcaf8b4b349d8886e928d794f1.setContent(html_41cc532dca5b4c548e3a7fe264948e48);
+        
+
+        circle_marker_14f8be8f893d4581b001741eae1849d6.bindPopup(popup_6fe14edcaf8b4b349d8886e928d794f1)
+        ;
+
+        
+    
+    
+            var circle_marker_64016dfdac494c2a9b6ed7a4f20472c4 = L.circleMarker(
+                [41.7698, -70.5091],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_a52d1e892f6a4f49abe426541f81a4e0 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_1d34bb497d364030a4b2f780a5f2fe0d = $(`<div id="html_1d34bb497d364030a4b2f780a5f2fe0d" style="width: 100.0%; height: 100.0%;">GENON CANAL GENERATING STATION</div>`)[0];
+            popup_a52d1e892f6a4f49abe426541f81a4e0.setContent(html_1d34bb497d364030a4b2f780a5f2fe0d);
+        
+
+        circle_marker_64016dfdac494c2a9b6ed7a4f20472c4.bindPopup(popup_a52d1e892f6a4f49abe426541f81a4e0)
+        ;
+
+        
+    
+    
+            var circle_marker_414e0efdad6647fba07d989a210ea356 = L.circleMarker(
+                [41.8023, -70.7875],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_5337d275be8e45438219d86a9cc226fa = L.popup({"maxWidth": "100%"});
+
+        
+            var html_fac9e06c34bd4aab85692a40873dea55 = $(`<div id="html_fac9e06c34bd4aab85692a40873dea55" style="width: 100.0%; height: 100.0%;">SEMASS RESOURCE RECOVERY FACILITY</div>`)[0];
+            popup_5337d275be8e45438219d86a9cc226fa.setContent(html_fac9e06c34bd4aab85692a40873dea55);
+        
+
+        circle_marker_414e0efdad6647fba07d989a210ea356.bindPopup(popup_5337d275be8e45438219d86a9cc226fa)
+        ;
+
+        
+    
+    
+            var circle_marker_bd612c8c66404a438eaac058223df1c7 = L.circleMarker(
+                [42.10516, -72.03195],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_f8067fff1ed344b8a7ab1e14a597b433 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_a92f48fab02540b2bdfdae9298d4fc96 = $(`<div id="html_a92f48fab02540b2bdfdae9298d4fc96" style="width: 100.0%; height: 100.0%;">SOUTHBRIDGE RECYCLING & DISPOSAL PARK</div>`)[0];
+            popup_f8067fff1ed344b8a7ab1e14a597b433.setContent(html_a92f48fab02540b2bdfdae9298d4fc96);
+        
+
+        circle_marker_bd612c8c66404a438eaac058223df1c7.bindPopup(popup_f8067fff1ed344b8a7ab1e14a597b433)
+        ;
+
+        
+    
+    
+            var circle_marker_5c3b4d7bba824305b462f5502b5800a4 = L.circleMarker(
+                [42.241669, -70.965851],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_912389c650e6433285cafede933d6a0c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_b9d967795833436db3757359fe11f3fb = $(`<div id="html_b9d967795833436db3757359fe11f3fb" style="width: 100.0%; height: 100.0%;">FORE RIVER GENERATING STATION</div>`)[0];
+            popup_912389c650e6433285cafede933d6a0c.setContent(html_b9d967795833436db3757359fe11f3fb);
+        
+
+        circle_marker_5c3b4d7bba824305b462f5502b5800a4.bindPopup(popup_912389c650e6433285cafede933d6a0c)
+        ;
+
+        
+    
+    
+            var circle_marker_efa455211ed544129b9b525274c4a6eb = L.circleMarker(
+                [42.039162, -71.29993],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_a2d68ebb7cc5465aa81fa23db3079896 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_e836547341964121b58feee08e0dd413 = $(`<div id="html_e836547341964121b58feee08e0dd413" style="width: 100.0%; height: 100.0%;">PLAINVILLE LANDFILL</div>`)[0];
+            popup_a2d68ebb7cc5465aa81fa23db3079896.setContent(html_e836547341964121b58feee08e0dd413);
+        
+
+        circle_marker_efa455211ed544129b9b525274c4a6eb.bindPopup(popup_a2d68ebb7cc5465aa81fa23db3079896)
+        ;
+
+        
+    
+    
+            var circle_marker_31a13da49fc8450a89362b6ced3995ec = L.circleMarker(
+                [41.7378, -71.1453],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_a0fe32a778a9461f88564cb827472e42 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_d80b43d21c8144059d43e9a4b05211af = $(`<div id="html_d80b43d21c8144059d43e9a4b05211af" style="width: 100.0%; height: 100.0%;">SOMERSET POWER GENERATING STATION</div>`)[0];
+            popup_a0fe32a778a9461f88564cb827472e42.setContent(html_d80b43d21c8144059d43e9a4b05211af);
+        
+
+        circle_marker_31a13da49fc8450a89362b6ced3995ec.bindPopup(popup_a0fe32a778a9461f88564cb827472e42)
+        ;
+
+        
+    
+    
+            var circle_marker_84e124571c904eef8e1a3a59f046dbeb = L.circleMarker(
+                [42.17959000000001, -72.36674599999998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_032aaef1fc5f477a822dbc06818333e8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f7a0085c8813445088a85460f50c52a6 = $(`<div id="html_f7a0085c8813445088a85460f50c52a6" style="width: 100.0%; height: 100.0%;">MUSTANG MOTORCYCLE PRODUCTS</div>`)[0];
+            popup_032aaef1fc5f477a822dbc06818333e8.setContent(html_f7a0085c8813445088a85460f50c52a6);
+        
+
+        circle_marker_84e124571c904eef8e1a3a59f046dbeb.bindPopup(popup_032aaef1fc5f477a822dbc06818333e8)
+        ;
+
+        
+    
+    
+            var circle_marker_e6b1ff50fea3415085403f823c9bb2e7 = L.circleMarker(
+                [42.447211, -70.98047199999998],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_f7268c68ba0e458092711fec4d6b0e5d = L.popup({"maxWidth": "100%"});
+
+        
+            var html_22c45ea418a4473fa0a2dc4f78da4255 = $(`<div id="html_22c45ea418a4473fa0a2dc4f78da4255" style="width: 100.0%; height: 100.0%;">WHEELABRATOR WASTE TO ENERGY PLANT</div>`)[0];
+            popup_f7268c68ba0e458092711fec4d6b0e5d.setContent(html_22c45ea418a4473fa0a2dc4f78da4255);
+        
+
+        circle_marker_e6b1ff50fea3415085403f823c9bb2e7.bindPopup(popup_f7268c68ba0e458092711fec4d6b0e5d)
+        ;
+
+        
+    
+    
+            var circle_marker_1da9a115069a4316a2dace26903480f7 = L.circleMarker(
+                [42.29416, -72.71669],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_0e6232589eb1454fb9830015f8054e97 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_da4c8dac19a74d519462abf0a40c2041 = $(`<div id="html_da4c8dac19a74d519462abf0a40c2041" style="width: 100.0%; height: 100.0%;">NORTHAMPTON LANDFILL</div>`)[0];
+            popup_0e6232589eb1454fb9830015f8054e97.setContent(html_da4c8dac19a74d519462abf0a40c2041);
+        
+
+        circle_marker_1da9a115069a4316a2dace26903480f7.bindPopup(popup_0e6232589eb1454fb9830015f8054e97)
+        ;
+
+        
+    
+    
+            var circle_marker_3c9d1f4ad395481f8a9c83d62cde8f88 = L.circleMarker(
+                [41.9923, -70.89789],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_568fd9b5c76b4a4ba7148fb72c3ea7bb = L.popup({"maxWidth": "100%"});
+
+        
+            var html_9385d2e8b7964bef85a74756c43c115f = $(`<div id="html_9385d2e8b7964bef85a74756c43c115f" style="width: 100.0%; height: 100.0%;">HALIFAX LANDFILL</div>`)[0];
+            popup_568fd9b5c76b4a4ba7148fb72c3ea7bb.setContent(html_9385d2e8b7964bef85a74756c43c115f);
+        
+
+        circle_marker_3c9d1f4ad395481f8a9c83d62cde8f88.bindPopup(popup_568fd9b5c76b4a4ba7148fb72c3ea7bb)
+        ;
+
+        
+    
+    
+            var circle_marker_070184070b804009a792ad4db22d141c = L.circleMarker(
+                [42.112351, -72.015097],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_fca4d6d020be45e0a6878b646d58b7f9 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_df2170b406fa40f3af38e94de092cc89 = $(`<div id="html_df2170b406fa40f3af38e94de092cc89" style="width: 100.0%; height: 100.0%;">MILLENNIUM POWER PLANT</div>`)[0];
+            popup_fca4d6d020be45e0a6878b646d58b7f9.setContent(html_df2170b406fa40f3af38e94de092cc89);
+        
+
+        circle_marker_070184070b804009a792ad4db22d141c.bindPopup(popup_fca4d6d020be45e0a6878b646d58b7f9)
+        ;
+
+        
+    
+    
+            var circle_marker_8cc749c57ca04971b0b547fd99f4f26e = L.circleMarker(
+                [42.128148, -71.514298],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_fafb2c8a3d74401eae037a7d25758f9b = L.popup({"maxWidth": "100%"});
+
+        
+            var html_3e16dba03f8140c19da43b7392c3e23b = $(`<div id="html_3e16dba03f8140c19da43b7392c3e23b" style="width: 100.0%; height: 100.0%;">MILFORD POWER PLANT</div>`)[0];
+            popup_fafb2c8a3d74401eae037a7d25758f9b.setContent(html_3e16dba03f8140c19da43b7392c3e23b);
+        
+
+        circle_marker_8cc749c57ca04971b0b547fd99f4f26e.bindPopup(popup_fafb2c8a3d74401eae037a7d25758f9b)
+        ;
+
+        
+    
+    
+            var circle_marker_e3da3a085a5e4ae6ad258898dfc98f7a = L.circleMarker(
+                [42.71702, -71.1799],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_3ee949ac4fdd4a4fb7731f0289cfb72c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_41c8c459fb8c4280acedc8175ef7c849 = $(`<div id="html_41c8c459fb8c4280acedc8175ef7c849" style="width: 100.0%; height: 100.0%;">POLARTEC</div>`)[0];
+            popup_3ee949ac4fdd4a4fb7731f0289cfb72c.setContent(html_41c8c459fb8c4280acedc8175ef7c849);
+        
+
+        circle_marker_e3da3a085a5e4ae6ad258898dfc98f7a.bindPopup(popup_3ee949ac4fdd4a4fb7731f0289cfb72c)
+        ;
+
+        
+    
+    
+            var circle_marker_17c885e6cb8a4bed8354de4ce2b17646 = L.circleMarker(
+                [42.5255, -70.877],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_a8e03229efa94b3cb504c89b1294b4b4 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_bbd8aa6e55604571a46c17b7e01c35ad = $(`<div id="html_bbd8aa6e55604571a46c17b7e01c35ad" style="width: 100.0%; height: 100.0%;">SALEM HARBOR STATION</div>`)[0];
+            popup_a8e03229efa94b3cb504c89b1294b4b4.setContent(html_bbd8aa6e55604571a46c17b7e01c35ad);
+        
+
+        circle_marker_17c885e6cb8a4bed8354de4ce2b17646.bindPopup(popup_a8e03229efa94b3cb504c89b1294b4b4)
+        ;
+
+        
+    
+    
+            var circle_marker_3193530d989740168819f8595079e6a3 = L.circleMarker(
+                [42.7654, -71.124025],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_1f4e17b65ae3410097c2661843a68772 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_967390dc23554c639886919b463d1fd7 = $(`<div id="html_967390dc23554c639886919b463d1fd7" style="width: 100.0%; height: 100.0%;">COVANTA RESOURCE RECOVERY FACILITY</div>`)[0];
+            popup_1f4e17b65ae3410097c2661843a68772.setContent(html_967390dc23554c639886919b463d1fd7);
+        
+
+        circle_marker_3193530d989740168819f8595079e6a3.bindPopup(popup_1f4e17b65ae3410097c2661843a68772)
+        ;
+
+        
+    
+    
+            var circle_marker_3c92d6a77d494ec784679913915ee787 = L.circleMarker(
+                [42.396463, -71.271237],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_39d0bb982c6b40878eef32c3ad45ada8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_ffd74dd6fab94669b7a11d6f52e765c9 = $(`<div id="html_ffd74dd6fab94669b7a11d6f52e765c9" style="width: 100.0%; height: 100.0%;">NATIONAL GRID CORPORATE HEADQUARTERS</div>`)[0];
+            popup_39d0bb982c6b40878eef32c3ad45ada8.setContent(html_ffd74dd6fab94669b7a11d6f52e765c9);
+        
+
+        circle_marker_3c92d6a77d494ec784679913915ee787.bindPopup(popup_39d0bb982c6b40878eef32c3ad45ada8)
+        ;
+
+        
+    
+    
+            var circle_marker_7fc5448480584c4789eee24218065502 = L.circleMarker(
+                [42.468401, -73.19414300000003],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8, "stroke": true, "weight": 1}
+            ).addTo(fast_marker_cluster_f3a3f6d9fa5945f0bdea19990be66632);
+        
+    
+        var popup_154a2b75e5b148c59478e29d26884ad8 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_05ed3f1420984178a02cec048d3d0e6d = $(`<div id="html_05ed3f1420984178a02cec048d3d0e6d" style="width: 100.0%; height: 100.0%;">COVANTA RESOURCE RECOVERY FACILITY</div>`)[0];
+            popup_154a2b75e5b148c59478e29d26884ad8.setContent(html_05ed3f1420984178a02cec048d3d0e6d);
+        
+
+        circle_marker_7fc5448480584c4789eee24218065502.bindPopup(popup_154a2b75e5b148c59478e29d26884ad8)
+        ;
+
+        
+    
+    
+            map_715fe91fb628445a8d31eff02b44e6b5.fitBounds(
+                [[41.67365, -73.25084], [42.7654, -70.5091]],
+                {}
+            );
+        
+</script></body></html>
