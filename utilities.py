@@ -8,8 +8,8 @@ def mapper_marker(df):
     m = folium.Map()
 
     # Create the Marker Cluster array
-    kwargs={"disableClusteringAtZoom": 10, "showCoverageOnHover": False}
-    mc = FastMarkerCluster("", **kwargs)
+    #kwargs={"disableClusteringAtZoom": 10, "showCoverageOnHover": False}
+    mc = FastMarkerCluster("")
  
     # Add a clickable marker for each facility
     for index, row in df.iterrows():
