@@ -20,7 +20,7 @@ def mapper_marker(df):
                 "marker.bindPopup(popup);"
                 'return marker};')
     
-    m.add_child(FastMarkerCluster(df[["FAC_LAT", "FAC_LONG", "FAC_NAME"]].values.tolist(), callback=callback))
+    m.add_child(FastMarkerCluster(df[["FAC_LAT", "FAC_LONG", "FAC_NAME"]].values.tolist())) #, callback=callback
     bounds = m.get_bounds()
     m.fit_bounds(bounds)
 
