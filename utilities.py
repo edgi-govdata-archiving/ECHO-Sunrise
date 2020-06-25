@@ -11,16 +11,30 @@ def mapper_marker(df):
     #kwargs={"disableClusteringAtZoom": 10, "showCoverageOnHover": False}
     
     # Adjust Leaflet-specific properties
-    callback = ('function (row) {' 
-                'var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {radius: 5, fill: "orange"});'
-                "var popup = L.popup({maxWidth: '300'});"
-                "const display_text = {text: row[2]};"
-                "var mytext = $(`<div id='mytext' class='display_text' style='width: 100.0%; height: 100.0%;'> ${display_text.text}</div>`)[0];"
-                "popup.setContent(mytext);"
-                "marker.bindPopup(popup);"
-                'return marker};')
+    #callback = ('function (row) {' 
+                #'var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {radius: 5, fill: "orange"});'
+                #"var popup = L.popup({maxWidth: '300'});"
+                #"const display_text = {text: row[2]};"
+                #"var mytext = $(`<div id='mytext' class='display_text' style='width: 100.0%; height: 100.0%;'> ${display_text.text}</div>`)[0];"
+                #"popup.setContent(mytext);"
+                #"marker.bindPopup(popup);"
+                #'return marker};')
+    mc = FastMarkerCluster("")
+ 
+    # Add a clickable marker for each facility
+    for index, row in df.iterrows():
+        mc.add_child(folium.CircleMarker(
+            location = [row["FAC_LAT"], row["FAC_LONG"]],
+            popup = row["FAC_NAME"] + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>",
+            radius = 8,
+            color = "black",
+            weight = 1,
+            fill_color = "orange",
+            fill_opacity= .4
+        ))
     
-    m.add_child(FastMarkerCluster(df[["FAC_LAT", "FAC_LONG", "FAC_NAME"]].values.tolist())) #, callback=callback
+    m.add_child(mc)
+    #m.add_child(FastMarkerCluster(df[["FAC_LAT", "FAC_LONG", "FAC_NAME"]].values.tolist(), callback=callback))
     bounds = m.get_bounds()
     m.fit_bounds(bounds)
 
