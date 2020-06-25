@@ -1,6 +1,66 @@
 import folium
 from folium.plugins import FastMarkerCluster
 
+def get_program_data(echo_data, program, program_data):
+    key=dict() # Create a way to look up Registry IDs in ECHO_EXPORTER later
+
+    # We need to provide a custom list of program ids for some programs.
+    if ( program.name == "Air Inspections" or program.name == "Air Enforcements" ):
+        # The REGISTRY_ID field is the index of the echo_data
+        registry_ids = echo_data[echo_data['AIR_FLAG'] == 'Y'].index.values
+        key = { i : i for i in registry_ids }
+        program_data = program.get_data( ee_ids=registry_ids )
+    elif ( program.name == "Combined Air Emissions" ):
+        ghg_registry_ids = echo_data[echo_data['GHG_FLAG'] == 'Y'].index.values
+        tri_registry_ids = echo_data[echo_data['TRI_FLAG'] == 'Y'].index.values
+        id_set = np.union1d( ghg_registry_ids, tri_registry_ids )
+        registry_ids = list(id_set)
+        program_data = program.get_data( ee_ids=registry_ids )
+        key = { i : i for i in registry_ids }
+    elif ( program.name == "Greenhouse Gases" or program.name == "Toxic Releases" ):
+        program_flag = program.echo_type + '_FLAG'
+        registry_ids = echo_data[echo_data[ program_flag ] == 'Y'].index.values
+        program_data = program.get_data( ee_ids=registry_ids )
+        key = { i : i for i in registry_ids }
+    else:
+        ids_string = program.echo_type + '_IDS'
+        ids = list()
+        registry_ids = list()
+        for index, value in echo_data[ ids_string ].items():
+            try:
+                for this_id in value.split():
+                    ids.append( this_id )
+                    key[this_id]=index
+            except ( KeyError, AttributeError ) as e:
+                pass
+        program_data = program.get_data( ee_ids=ids )
+
+    # Find the facility that matches the program data, by REGISTRY_ID.  
+    # Add lat and lon, facility name and REGISTRY_ID as fac_registry_id. 
+    # (Note: not adding REGISTRY_ID right now as it is sometimes interpreted as an int and that messes with the charts...)
+
+    my_prog_data = []
+    no_data_ids = []
+
+    # Look through all the facilities in my area and program and get supplemental echo_data info
+    if (program_data is None): # Handle no data
+        print("Sorry, we don't have data for this program! That could be an error on our part, or ECHO's, or because the data type doesn't apply to this area.")
+    else:
+        for fac in program_data.itertuples():
+            fac_id = fac.Index
+            reg_id = key[fac_id] # Look up this facility's Registry ID through its Program ID
+            try:
+                e=echo_data.loc[echo_data.index==reg_id].copy()[['FAC_NAME', 'FAC_LAT', 'FAC_LONG', 'DFR_URL']].to_dict('index')
+                e = e[reg_id] # remove indexer
+                p =  fac._asdict()
+                e.update(p)
+                my_prog_data.append(e)
+            except KeyError:
+                # The facility wasn't found in the program data.
+                no_data_ids.append( fac.Index )
+
+    return my_prog_data
+
 # Helps us make the map! PUT IN UTILITIES....
 # Based on https://medium.com/@bobhaffner/folium-markerclusters-and-fastmarkerclusters-1e03b01cb7b1
 def mapper_marker(df):
