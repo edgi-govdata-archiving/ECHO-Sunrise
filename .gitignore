@@ -1,0 +1,7 @@
+
+.ipynb_checkpoints/ECHO-Sunrise-checkpoint.ipynb
+ECHO-Geo/
+ECHO-Sunrise/
+ECHO_modules/
+.DS_Store
+*.csv
