@@ -1,5 +1,6 @@
 import folium
 from folium.plugins import FastMarkerCluster
+import numpy as np
 
 def get_program_data(echo_data, program, program_data):
     key=dict() # Create a way to look up Registry IDs in ECHO_EXPORTER later
@@ -50,7 +51,7 @@ def get_program_data(echo_data, program, program_data):
             fac_id = fac.Index
             reg_id = key[fac_id] # Look up this facility's Registry ID through its Program ID
             try:
-                e=echo_data.loc[echo_data.index==reg_id].copy()[['FAC_NAME', 'FAC_LAT', 'FAC_LONG', 'DFR_URL']].to_dict('index')
+                e=echo_data.loc[echo_data.index==reg_id].copy()[['FAC_NAME', 'FAC_LAT', 'FAC_LONG', 'DFR_URL', 'FAC_PERCENT_MINORITY']].to_dict('index')
                 e = e[reg_id] # remove indexer
                 p =  fac._asdict()
                 e.update(p)
