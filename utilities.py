@@ -39,8 +39,8 @@ def get_program_data(echo_data, program, program_data):
     # Aggregate data using agg_col and agg_type from DataSet.py
 
     print(program_data)
-    #test = program_data.groupby(program_data[program.idx_field])[[program_data[program.agg_col]]].agg(program.agg_type)
-    #print(test)
+    test = program_data.groupby(program_data.index)[[program_data[program.agg_col]]].agg(program.agg_type)
+    print(test)
 
     # Find the facility that matches the program data, by REGISTRY_ID.  
     # Add lat and lon, facility name and REGISTRY_ID as fac_registry_id. 
