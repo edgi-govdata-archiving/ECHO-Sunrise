@@ -36,6 +36,10 @@ def get_program_data(echo_data, program, program_data):
                 pass
         program_data = program.get_data( ee_ids=ids )
 
+    # Aggregate data using agg_col and agg_type from DataSet.py
+
+    print(program_data.agg_type)
+    
     # Find the facility that matches the program data, by REGISTRY_ID.  
     # Add lat and lon, facility name and REGISTRY_ID as fac_registry_id. 
     # (Note: not adding REGISTRY_ID right now as it is sometimes interpreted as an int and that messes with the charts...)
