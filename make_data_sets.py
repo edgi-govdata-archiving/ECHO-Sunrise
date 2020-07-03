@@ -60,10 +60,10 @@ def make_data_sets():
     #                 table_name='POLL_RPT_COMBINED_EMISSIONS', idx_field='REGISTRY_ID',
     #                 date_field='REPORTING_YEAR', date_format='%Y', sql = my_sql )
     # data_sets[ ds.name ] = ds
-    # ds = DataSet( name='Water Quarterly Violations', echo_type="NPDES",
-    #                 table_name='NPDES_QNCR_HISTORY', idx_field='NPDES_ID',
-    #                 date_field='YEARQTR', date_format='%Y' )
-    # data_sets[ ds.name ] = ds
+    ds = DataSet( name='Water Quarterly Violations', echo_type="NPDES",
+                    table_name='NPDES_QNCR_HISTORY', idx_field='NPDES_ID',
+                    date_field='YEARQTR', date_format='%Y' , agg_type = "sum", agg_col="NUME90Q")
+    data_sets[ ds.name ] = ds
     # ds = DataSet( name='Clean Water Inspections', echo_type="NPDES",
     #                 table_name='NPDES_INSPECTIONS', idx_field='NPDES_ID',
     #                 date_field='ACTUAL_END_DATE', date_format='%m/%d/%Y' )

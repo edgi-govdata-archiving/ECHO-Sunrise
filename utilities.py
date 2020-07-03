@@ -1,6 +1,28 @@
 import folium
 from folium.plugins import FastMarkerCluster
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+# Set up some default parameters for graphing
+from matplotlib import cycler
+colour = "#00C2AB" # The default colour for the barcharts
+colors = cycler('color',
+                ['#4FBBA9', '#E56D13', '#D43A69',
+                 '#25539f', '#88BB44', '#FFBBBB'])
+plt.rc('axes', facecolor='#E6E6E6', edgecolor='none',
+       axisbelow=True, grid=True, prop_cycle=colors)
+plt.rc('grid', color='w', linestyle='solid')
+plt.rc('xtick', direction='out', color='gray')
+plt.rc('ytick', direction='out', color='gray')
+plt.rc('patch', edgecolor='#E6E6E6')
+plt.rc('lines', linewidth=2)
+font = {'family' : 'DejaVu Sans',
+        'weight' : 'normal',
+        'size'   : 16}
+plt.rc('font', **font)
+plt.rc('legend', fancybox = True, framealpha=1, shadow=True, borderpad=1)
 
 def get_program_data(echo_data, program, program_data):
     key=dict() # Create a way to look up Registry IDs in ECHO_EXPORTER later
@@ -36,16 +58,30 @@ def get_program_data(echo_data, program, program_data):
                 pass
         program_data = program.get_data( ee_ids=ids )
 
-    # Aggregate data using agg_col and agg_type from DataSet.py
+    # Filter to 2010 and later
+    if (program.name == "Water Quarterly Violations"): 
+        year = program_data[program.date_field].astype("str").str[0:4:1]
+        program_data[program.date_field] = year
+    program_data[program.date_field] = pd.to_datetime(program_data[program.date_field], format=program.date_format, errors='coerce')
+    program_data=program_data.loc[(program_data[program.date_field] >= pd.to_datetime('2010'))] 
 
-    print(program_data)
-    test = program_data.groupby(program_data.index)[[program_data[program.agg_col]]].agg(program.agg_type)
-    print(test)
+    # Aggregate data using agg_col and agg_type from DataSet.py
+    program_data.reset_index(inplace=True) # By default, DataSet.py indexes the results from the query. But we have to reset the indext to group it.
+    program_data = program_data.groupby([program.idx_field, program.date_field])[[program.agg_col]].agg(program.agg_type) # Sum or count for each facility and for each year
+    program_data.reset_index(inplace=True)
+    program_data.set_index(program.idx_field, inplace=True)  # These two steps carry through the date field
+
+    bars = program_data.groupby(program.date_field)[[program.agg_col]].agg("sum") # Sum of total emissions or inspections or etc. per year
+    bars.index = bars.index.strftime('%Y')
+    #print(bars)
+
+    program_data.reset_index(inplace=True)
+    program_data = program_data.groupby([program.idx_field])[[program.agg_col]].agg("sum") # Sum of emissions or inspections or etc. for each facility across years
+    #print(program_data)
 
     # Find the facility that matches the program data, by REGISTRY_ID.  
-    # Add lat and lon, facility name and REGISTRY_ID as fac_registry_id. 
+    # Add lat and lon, facility name, and an index
     # (Note: not adding REGISTRY_ID right now as it is sometimes interpreted as an int and that messes with the charts...)
-
     my_prog_data = []
     no_data_ids = []
 
@@ -54,19 +90,22 @@ def get_program_data(echo_data, program, program_data):
         print("Sorry, we don't have data for this program! That could be an error on our part, or ECHO's, or because the data type doesn't apply to this area.")
     else:
         for fac in program_data.itertuples():
-            fac_id = fac.Index
+            fac_id = fac.Index # Use the Index
             reg_id = key[fac_id] # Look up this facility's Registry ID through its Program ID
             try:
                 e=echo_data.loc[echo_data.index==reg_id].copy()[['FAC_NAME', 'FAC_LAT', 'FAC_LONG', 'DFR_URL', 'FAC_PERCENT_MINORITY']].to_dict('index')
                 e = e[reg_id] # remove indexer
-                p =  fac._asdict()
+                p =  fac._asdict() #split id and year?
                 e.update(p)
                 my_prog_data.append(e)
             except KeyError:
                 # The facility wasn't found in the program data.
                 no_data_ids.append( fac.Index )
+   
+    my_prog_data=pd.DataFrame(my_prog_data)
+    bars = pd.DataFrame(bars)
 
-    return my_prog_data
+    return my_prog_data, bars
 
 # Helps us make the map! PUT IN UTILITIES....
 # Based on https://medium.com/@bobhaffner/folium-markerclusters-and-fastmarkerclusters-1e03b01cb7b1
@@ -119,7 +158,7 @@ def mapper_circle(df, a):
     for index, row in df.iterrows():
         folium.CircleMarker(
             location = [row["FAC_LAT"], row["FAC_LONG"]],
-            popup = row["FAC_NAME"] +": " + str(int(row[a])), # + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>",
+            popup = row["FAC_NAME"] +": " + str(int(row[a])) + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>", # + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>",
             radius = scale[row["quantile"]],
             color = "black",
             weight = 1,
