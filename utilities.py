@@ -1,5 +1,6 @@
 import folium
 from folium.plugins import FastMarkerCluster
+from folium import FeatureGroup
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -57,7 +58,7 @@ def get_program_data(echo_data, program, program_data):
             except ( KeyError, AttributeError ) as e:
                 pass
         program_data = program.get_data( ee_ids=ids )
-    print(program_data)
+
     # Filter to 2010 and later
     if (program.name == "Water Quarterly Violations"): 
         year = program_data[program.date_field].astype("str").str[0:4:1]
@@ -147,14 +148,14 @@ def mapper_marker(df):
     # Show the map
     return m
 
-def mapper_circle(df, a):
+def mapper_area(df, geo_json_data, att_data, g, a):
     # Initialize the map
     m = folium.Map()
 
-    # Scale
+    # Scale the size of the circles
     scale = {0:8, 1:12, 2:16, 3:24}
-    
     # Add a clickable marker for each facility
+    cm_map = FeatureGroup(name="Facilities")
     for index, row in df.iterrows():
         folium.CircleMarker(
             location = [row["FAC_LAT"], row["FAC_LONG"]],
@@ -163,33 +164,28 @@ def mapper_circle(df, a):
             color = "black",
             weight = 1,
             fill_color = "orange",
-            fill_opacity = .4,
-            legend_name = a
-        ).add_to(m)
-        
-    bounds = m.get_bounds()
-    m.fit_bounds(bounds)
+            fill_opacity = .4
+        ).add_to(cm_map)
+    cm_map.add_to(m)
 
-    # Show the map
-    return m
-
-def mapper_area(geo_json_data, att_data, g, a):
     q = pd.cut(np.array(att_data['value']), bins=5) # Creates an Equal Interval scale with 5 bins. #quantile([0, 0.25,0.5,0.75, 1]) # Create a quantile scale. This should put an equal number of geographies in each bin/color.
-    m = folium.Map()
     c = folium.Choropleth(
         geo_data = geo_json_data,
         data = att_data,
         columns =['geo', 'value'], key_on='feature.properties.'+g, # Join the geo data and the attribute data on a key id
         fill_color ='OrRd',fill_opacity=0.75,line_weight=.5,nan_fill_opacity=.5, nan_fill_color="grey", highlight=True, 
         bins =[min(att_data['value']), q.categories[1].left, q.categories[2].left, q.categories[3].left, q.categories[4].left, max(att_data['value'])],
-        legend_name = a
+        legend_name = a,
+        name = g,
     ).add_to(m)
-
     c.geojson.add_child(
                 folium.features.GeoJsonTooltip([g])
             )
-
+    
+    m.keep_in_front(cm_map)
     bounds = m.get_bounds()
     m.fit_bounds(bounds)
+
+    folium.LayerControl().add_to(m)
 
     return m
