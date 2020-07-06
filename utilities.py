@@ -163,7 +163,8 @@ def mapper_circle(df, a):
             color = "black",
             weight = 1,
             fill_color = "orange",
-            fill_opacity= .4
+            fill_opacity = .4,
+            legend_name = a
         ).add_to(m)
         
     bounds = m.get_bounds()
@@ -172,16 +173,16 @@ def mapper_circle(df, a):
     # Show the map
     return m
 
-def mapper_area(geo_json_data, att_data, g):
-    q = att_data['value'].quantile([0, 0.25,0.5,0.75, 1]) # Create a quantile scale. This should put an equal number of geographies in each bin/color.
+def mapper_area(geo_json_data, att_data, g, a):
+    q = pd.cut(np.array(att_data['value']), bins=5) # Creates an Equal Interval scale with 5 bins. #quantile([0, 0.25,0.5,0.75, 1]) # Create a quantile scale. This should put an equal number of geographies in each bin/color.
     m = folium.Map()
     c = folium.Choropleth(
         geo_data = geo_json_data,
         data = att_data,
-        columns=['geo', 'value'], key_on='feature.properties.'+g, # Join the geo data and the attribute data on a key id
-        fill_color='OrRd',fill_opacity=0.75,line_weight=.5,nan_fill_opacity=.5, nan_fill_color="grey", highlight=True, 
-        bins=[q[0.00],q[0.25], q[0.5], q[0.75], q[1.00]],
-        legend_name="Value"
+        columns =['geo', 'value'], key_on='feature.properties.'+g, # Join the geo data and the attribute data on a key id
+        fill_color ='OrRd',fill_opacity=0.75,line_weight=.5,nan_fill_opacity=.5, nan_fill_color="grey", highlight=True, 
+        bins =[min(att_data['value']), q.categories[1].left, q.categories[2].left, q.categories[3].left, q.categories[4].left, max(att_data['value'])],
+        legend_name = a
     ).add_to(m)
 
     c.geojson.add_child(

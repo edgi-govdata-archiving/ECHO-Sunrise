@@ -5,3 +5,5 @@ ECHO-Sunrise/
 ECHO_modules/
 .DS_Store
 *.csv
+.ipynb_checkpoints/ECHO-Sunrise-Explore-checkpoint.ipynb
+.ipynb_checkpoints/ECHO-Sunrise-Explore-checkpoint.ipynb
