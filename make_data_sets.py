@@ -10,20 +10,13 @@
 
 from ECHO_modules.DataSet import DataSet
 
-geo_column = {"county": "COUNTY", "state_districts": "REP_DIST", "town": "town"} # EXPAND
-att_column = {"Greenhouse Gases": {"col":"ANNUAL_EMISSION", "agg":"sum"},
-              "Air Inspections": {"col": "ACTIVITY_TYPE_CODE", "agg": "count"},
-              "Clean Water Inspections": {"col":"ACTIVITY_TYPE_CODE", "agg":"count"},
-              "Combined Air Emissions": {"col":"ANNUAL_EMISSION", "agg":"sum"}
-             } # EXPAND
-
 def make_data_sets():
     data_sets = {}
     
-    # ds = DataSet( name='RCRA Violations', idx_field='ID_NUMBER', 
-    #                 table_name='RCRA_VIOLATIONS', echo_type="RCRA",
-    #                 date_field='DATE_VIOLATION_DETERMINED', date_format='%m/%d/%Y')
-    # data_sets[ ds.name ] = ds
+    ds = DataSet( name='RCRA Violations', idx_field='ID_NUMBER', 
+                    table_name='RCRA_VIOLATIONS', echo_type="RCRA",
+                    date_field='DATE_VIOLATION_DETERMINED', date_format='%m/%d/%Y', agg_type = "count", agg_col="VIOL_DETERMINED_BY_AGENCY") # For possible later use in assessing state v federal 
+    data_sets[ ds.name ] = ds
     # ds = DataSet( name='RCRA Inspections', idx_field='ID_NUMBER', 
     #                 table_name='RCRA_EVALUATIONS', echo_type="RCRA",
     #                 date_field='EVALUATION_START_DATE', date_format='%m/%d/%Y')
@@ -32,10 +25,10 @@ def make_data_sets():
     #                 table_name='RCRA_ENFORCEMENTS', idx_field='ID_NUMBER', 
     #                 date_field='EVALUATION_START_DATE', date_format='%m/%d/%Y' )
     # data_sets[ ds.name ] = ds
-    # ds = DataSet( name='Air Violations',  echo_type="AIR",
-    #                 table_name='ICIS-AIR_VIOLATION_HISTORY', idx_field='PGM_SYS_ID', 
-    #                 date_field='HPV_DAYZERO_DATE', date_format='%m-%d-%Y' )
-    # data_sets[ ds.name ] = ds
+    ds = DataSet( name='Air Violations',  echo_type="AIR",
+                    table_name='ICIS-AIR_VIOLATION_HISTORY', idx_field='PGM_SYS_ID', 
+                    date_field='HPV_DAYZERO_DATE', date_format='%m-%d-%Y', agg_type = "count", agg_col="AGENCY_TYPE_DESC") # For possible later use in assessing state v federal 
+    data_sets[ ds.name ] = ds
     # ds = DataSet( name='Air Formal Actions', echo_type="AIR",
     #                 table_name='ICIS-AIR_FORMAL_ACTIONS', idx_field='PGM_SYS_ID',
     #                 date_field='SETTLEMENT_ENTERED_DATE', date_format='%m/%d/%Y' )
@@ -54,12 +47,12 @@ def make_data_sets():
                     table_name='POLL_RPT_COMBINED_EMISSIONS', idx_field='REGISTRY_ID',
                     date_field='REPORTING_YEAR', date_format='%Y', sql = my_sql, agg_type = "sum", agg_col="ANNUAL_EMISSION")
     data_sets[ ds.name ] = ds
-    # my_sql = "select * from `POLL_RPT_COMBINED_EMISSIONS` " + \
-    #             " where PGM_SYS_ID = 'TRIS' and REGISTRY_ID in "
-    # ds = DataSet( name='Toxic Releases', echo_type="TRI",
-    #                 table_name='POLL_RPT_COMBINED_EMISSIONS', idx_field='REGISTRY_ID',
-    #                 date_field='REPORTING_YEAR', date_format='%Y', sql = my_sql )
-    # data_sets[ ds.name ] = ds
+    my_sql = "select * from `POLL_RPT_COMBINED_EMISSIONS` " + \
+                 " where PGM_SYS_ID = 'TRIS' and REGISTRY_ID in "
+    ds = DataSet( name='Toxic Releases', echo_type="TRI",
+                    table_name='POLL_RPT_COMBINED_EMISSIONS', idx_field='REGISTRY_ID',
+                    date_field='REPORTING_YEAR', date_format='%Y', sql = my_sql, agg_type = "sum", agg_col="ANNUAL_EMISSION")
+    data_sets[ ds.name ] = ds
     ds = DataSet( name='Water Quarterly Violations', echo_type="NPDES",
                     table_name='NPDES_QNCR_HISTORY', idx_field='NPDES_ID',
                     date_field='YEARQTR', date_format='%Y' , agg_type = "sum", agg_col="NUME90Q")
