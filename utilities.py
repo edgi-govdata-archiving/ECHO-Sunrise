@@ -180,11 +180,12 @@ def mapper_area(df, geo_json_data, g, a): #att_data,
         ).add_to(cm_map)
     cm_map.add_to(m)
     
-    folium.GeoJson(
+    gj = folium.GeoJson(
         geo_json_data,
         name = "Congressional District",
-        popup=folium.GeoJsonPopup(fields=["ids"])
-    ).add_to(m)
+    )
+    folium.GeoJsonTooltip(fields=["ids"]).add_to(gj)
+    gj.add_to(m)
 
     # q = pd.cut(np.array(att_data['value']), bins=5) # Creates an Equal Interval scale with 5 bins. #quantile([0, 0.25,0.5,0.75, 1]) # Create a quantile scale. This should put an equal number of geographies in each bin/color.
     # c = folium.Choropleth(
