@@ -1,10 +1,10 @@
 import folium
 from folium.plugins import FastMarkerCluster
 from folium import FeatureGroup
+from folium.features import DivIcon
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
 
 # Set up some default parameters for graphing
 from matplotlib import cycler
@@ -24,6 +24,10 @@ font = {'family' : 'DejaVu Sans',
         'size'   : 16}
 plt.rc('font', **font)
 plt.rc('legend', fancybox = True, framealpha=1, shadow=True, borderpad=1)
+
+# Pretty format numbers
+def formatter(value):
+    return f'{value:,}'
 
 def get_program_data(echo_data, program, program_data):
     key=dict() # Create a way to look up Registry IDs in ECHO_EXPORTER later
@@ -63,22 +67,29 @@ def get_program_data(echo_data, program, program_data):
     if (program.name == "Water Quarterly Violations"): 
         year = program_data[program.date_field].astype("str").str[0:4:1]
         program_data[program.date_field] = year
+
     program_data[program.date_field] = pd.to_datetime(program_data[program.date_field], format=program.date_format, errors='coerce')
     program_data=program_data.loc[(program_data[program.date_field] >= pd.to_datetime('2010'))] 
-
+    
     # Aggregate data using agg_col and agg_type from DataSet.py
-    program_data.reset_index(inplace=True) # By default, DataSet.py indexes the results from the query. But we have to reset the indext to group it.
-    program_data = program_data.groupby([program.idx_field, program.date_field])[[program.agg_col]].agg(program.agg_type) # Sum or count for each facility and for each year
-    program_data.reset_index(inplace=True)
-    program_data.set_index(program.idx_field, inplace=True)  # These two steps carry through the date field
-
-    bars = program_data.groupby(program.date_field)[[program.agg_col]].agg("sum") # Sum of total emissions or inspections or etc. per year
-    bars = bars.resample('Y').sum() # Sum again in case it wasn't summed the first time...
-    bars.index = bars.index.strftime('%Y')
-
-    program_data.reset_index(inplace=True)
-    program_data = program_data.groupby([program.idx_field])[[program.agg_col]].agg("sum") # Sum of emissions or inspections or etc. for each facility across years
-    #print(program_data)
+    if ((program.agg_type=="count") & (program.name.find("RCRA") == -1)):
+        program_data['State'] = np.where((program_data[program.agg_col]=="S") | (program_data[program.agg_col]=="State"), 1,0) # Count state actions
+        program_data['Federal'] = np.where((program_data[program.agg_col]=="E") | (program_data[program.agg_col]=="EPA"), 1,0) # Count EPA actions
+        program_data.reset_index(inplace=True) # By default, DataSet.py indexes the results from the query. But we have to reset the indext to group it.
+        bars = program_data.groupby(program.date_field)[["State", "Federal"]].sum() #Sum the counted State/EPA actions
+        bars = bars.resample("Y").sum()
+        bars.index = bars.index.strftime('%Y')
+        stacked=True
+        program_data = program_data.groupby([program.idx_field])[[program.agg_col]].agg(program.agg_type) # Count of inspections etc. for each facility
+    else:
+        program_data.reset_index(inplace=True) # By default, DataSet.py indexes the results from the query. But we have to reset the indext to group it.
+        bars = program_data.groupby(program.date_field)[[program.agg_col]].agg(program.agg_type) # Sum of total emissions etc. in the district per year
+        bars = bars.resample('Y').sum() # Sum again in case it wasn't summed the first time...
+        bars.index = bars.index.strftime('%Y') 
+        stacked=False
+        program_data = program_data.groupby([program.idx_field])[[program.agg_col]].agg(program.agg_type) # Sum of emissions etc. for each facility across years
+    
+    print("representing "+str(program_data.shape[0])+" facilities.")
 
     # Find the facility that matches the program data, by REGISTRY_ID.  
     # Add lat and lon, facility name, and an index
@@ -106,7 +117,8 @@ def get_program_data(echo_data, program, program_data):
     my_prog_data=pd.DataFrame(my_prog_data)
     bars = pd.DataFrame(bars)
 
-    return my_prog_data, bars
+
+    return my_prog_data, bars, stacked
 
 # Helps us make the map! PUT IN UTILITIES....
 # Based on https://medium.com/@bobhaffner/folium-markerclusters-and-fastmarkerclusters-1e03b01cb7b1
@@ -148,18 +160,18 @@ def mapper_marker(df):
     # Show the map
     return m
 
-def mapper_area(df, geo_json_data, att_data, g, a):
+def mapper_area(df, geo_json_data, g, a): #att_data, 
     # Initialize the map
     m = folium.Map()
 
     # Scale the size of the circles
-    scale = {0:8, 1:12, 2:16, 3:24}
+    scale = {0:4, 1:10, 2:16, 3:24, 4:32}
     # Add a clickable marker for each facility
     cm_map = FeatureGroup(name="Facilities")
     for index, row in df.iterrows():
         folium.CircleMarker(
             location = [row["FAC_LAT"], row["FAC_LONG"]],
-            popup = row["FAC_NAME"] +": " + str(int(row[a])) + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>", # + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>",
+            popup = row["FAC_NAME"] +": " + formatter(int(row[a])) + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>", # + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>",
             radius = scale[row["quantile"]],
             color = "black",
             weight = 1,
@@ -167,20 +179,26 @@ def mapper_area(df, geo_json_data, att_data, g, a):
             fill_opacity = .4
         ).add_to(cm_map)
     cm_map.add_to(m)
-
-    q = pd.cut(np.array(att_data['value']), bins=5) # Creates an Equal Interval scale with 5 bins. #quantile([0, 0.25,0.5,0.75, 1]) # Create a quantile scale. This should put an equal number of geographies in each bin/color.
-    c = folium.Choropleth(
-        geo_data = geo_json_data,
-        data = att_data,
-        columns =['geo', 'value'], key_on='feature.properties.'+g, # Join the geo data and the attribute data on a key id
-        fill_color ='OrRd',fill_opacity=0.75,line_weight=.5,nan_fill_opacity=.5, nan_fill_color="grey", highlight=True, 
-        bins =[min(att_data['value']), q.categories[1].left, q.categories[2].left, q.categories[3].left, q.categories[4].left, max(att_data['value'])],
-        legend_name = a,
-        name = g,
+    
+    folium.GeoJson(
+        geo_json_data,
+        name = "Congressional District",
+        popup=folium.GeoJsonPopup(fields=["ids"])
     ).add_to(m)
-    c.geojson.add_child(
-                folium.features.GeoJsonTooltip([g])
-            )
+
+    # q = pd.cut(np.array(att_data['value']), bins=5) # Creates an Equal Interval scale with 5 bins. #quantile([0, 0.25,0.5,0.75, 1]) # Create a quantile scale. This should put an equal number of geographies in each bin/color.
+    # c = folium.Choropleth(
+    #     geo_data = geo_json_data,
+    #     data = att_data,
+    #     columns =['geo', 'value'], key_on='feature.properties.'+g, # Join the geo data and the attribute data on a key id
+    #     fill_color ='OrRd',fill_opacity=0.75,line_weight=.5,nan_fill_opacity=.5, nan_fill_color="grey", highlight=True, 
+    #     bins =[min(att_data['value']), q.categories[1].left, q.categories[2].left, q.categories[3].left, q.categories[4].left, max(att_data['value'])],
+    #     legend_name = a,
+    #     name = g,
+    # ).add_to(m)
+    # c.geojson.add_child(
+    #             folium.features.GeoJsonTooltip([g])
+    #         )
     
     m.keep_in_front(cm_map)
     bounds = m.get_bounds()
