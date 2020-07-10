@@ -33,19 +33,12 @@ def get_program_data(echo_data, program, program_data):
     key=dict() # Create a way to look up Registry IDs in ECHO_EXPORTER later
 
     # We need to provide a custom list of program ids for some programs.
-    if ( program.name == "Air Inspections" or program.name == "Air Enforcements"):
+    if ( program.name == "CAA Inspections" or program.name == "CAA Enforcements"):
         # The REGISTRY_ID field is the index of the echo_data
         registry_ids = echo_data[echo_data['AIR_FLAG'] == 'Y'].index.values
         key = { i : i for i in registry_ids }
         program_data = program.get_data( ee_ids=registry_ids )
-    elif ( program.name == "Combined Air Emissions" ):
-        ghg_registry_ids = echo_data[echo_data['GHG_FLAG'] == 'Y'].index.values
-        tri_registry_ids = echo_data[echo_data['TRI_FLAG'] == 'Y'].index.values
-        id_set = np.union1d( ghg_registry_ids, tri_registry_ids )
-        registry_ids = list(id_set)
-        program_data = program.get_data( ee_ids=registry_ids )
-        key = { i : i for i in registry_ids }
-    elif ( program.name == "Greenhouse Gases" or program.name == "Toxic Releases" ):
+    elif ( program.name == "Greenhouse Gas Emissions" or program.name == "Toxic Releases Inventory - Air" ):
         program_flag = program.echo_type + '_FLAG'
         registry_ids = echo_data[echo_data[ program_flag ] == 'Y'].index.values
         program_data = program.get_data( ee_ids=registry_ids )
@@ -64,7 +57,7 @@ def get_program_data(echo_data, program, program_data):
         program_data = program.get_data( ee_ids=ids )
 
     # Filter to 2010 and later
-    if (program.name == "Water Quarterly Violations"): 
+    if (program.name == "CWA Violations"): 
         year = program_data[program.date_field].astype("str").str[0:4:1]
         program_data[program.date_field] = year
 

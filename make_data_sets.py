@@ -25,21 +25,21 @@ def make_data_sets():
                     table_name='RCRA_ENFORCEMENTS', idx_field='ID_NUMBER', 
                     date_field='ENFORCEMENT_ACTION_DATE', date_format='%m/%d/%Y', agg_type = "count", agg_col="ENFORCEMENT_AGENCY") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds
-    ds = DataSet( name='Air Violations',  echo_type="AIR",
+    ds = DataSet( name='CAA Violations',  echo_type="AIR",
                     table_name='ICIS-AIR_VIOLATION_HISTORY', idx_field='pgm_sys_id', 
                     date_field='HPV_DAYZERO_DATE', date_format='%m-%d-%Y', agg_type = "count", agg_col="AGENCY_TYPE_DESC") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds
-    ds = DataSet( name='Air Formal Actions', echo_type="AIR",
+    ds = DataSet( name='CAA Enforcements', echo_type="AIR",
                     table_name='ICIS-AIR_FORMAL_ACTIONS', idx_field='pgm_sys_id',
                     date_field='SETTLEMENT_ENTERED_DATE', date_format='%m/%d/%Y' , agg_type = "count", agg_col="STATE_EPA_FLAG") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds
-    ds = DataSet( name='Air Compliance', echo_type="AIR",
+    ds = DataSet( name='CAA Insepections', echo_type="AIR",
                     table_name='ICIS-AIR_FCES_PCES', idx_field='PGM_SYS_ID',
                     date_field='ACTUAL_END_DATE', date_format='%m-%d-%Y' , agg_type = "count", agg_col="STATE_EPA_FLAG") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds
     my_sql = "select * from `POLL_RPT_COMBINED_EMISSIONS` " + \
                 " where PGM_SYS_ACRNM = 'E-GGRT' and REGISTRY_ID in "
-    ds = DataSet( name='Greenhouse Gases', echo_type="GHG",
+    ds = DataSet( name='Greenhouse Gas Emissions', echo_type="GHG",
                     table_name='POLL_RPT_COMBINED_EMISSIONS', idx_field='REGISTRY_ID',
                     date_field='REPORTING_YEAR', date_format='%Y', sql = my_sql, agg_type = "sum", agg_col="ANNUAL_EMISSION")
     data_sets[ ds.name ] = ds
@@ -49,15 +49,15 @@ def make_data_sets():
                     table_name='POLL_RPT_COMBINED_EMISSIONS', idx_field='REGISTRY_ID',
                     date_field='REPORTING_YEAR', date_format='%Y', sql = my_sql, agg_type = "sum", agg_col="ANNUAL_EMISSION")
     data_sets[ ds.name ] = ds
-    ds = DataSet( name='Water Quarterly Violations', echo_type="NPDES",
+    ds = DataSet( name='CWA Violations', echo_type="NPDES",
                     table_name='NPDES_QNCR_HISTORY', idx_field='NPDES_ID',
                     date_field='YEARQTR', date_format='%Y' , agg_type = "sum", agg_col="NUME90Q")
     data_sets[ ds.name ] = ds
-    ds = DataSet( name='Clean Water Inspections', echo_type="NPDES",
+    ds = DataSet( name='CWA Inspections', echo_type="NPDES",
                     table_name='NPDES_INSPECTIONS', idx_field='NPDES_ID',
                     date_field='ACTUAL_END_DATE', date_format='%m/%d/%Y', agg_type = "count", agg_col="STATE_EPA_FLAG") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds
-    ds = DataSet( name='Clean Water Enforcements', echo_type="NPDES",
+    ds = DataSet( name='CWA Enforcements', echo_type="NPDES",
                     table_name='NPDES_FORMAL_ENFORCEMENT_ACTIONS', idx_field='NPDES_ID',
                     date_field='SETTLEMENT_ENTERED_DATE', date_format='%m/%d/%Y', agg_type = "count", agg_col="AGENCY") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds
