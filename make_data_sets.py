@@ -45,7 +45,7 @@ def make_data_sets():
     data_sets[ ds.name ] = ds
     my_sql = "select * from `POLL_RPT_COMBINED_EMISSIONS` " + \
                  " where PGM_SYS_ID = 'TRIS' and REGISTRY_ID in "
-    ds = DataSet( name='Toxic Releases', echo_type="TRI",
+    ds = DataSet( name='Toxic Releases Inventory - Air', echo_type="TRI",
                     table_name='POLL_RPT_COMBINED_EMISSIONS', idx_field='REGISTRY_ID',
                     date_field='REPORTING_YEAR', date_format='%Y', sql = my_sql, agg_type = "sum", agg_col="ANNUAL_EMISSION")
     data_sets[ ds.name ] = ds
