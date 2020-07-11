@@ -4,6 +4,7 @@ from folium import FeatureGroup
 from folium.features import DivIcon
 import numpy as np
 import pandas as pd
+import geopandas
 import matplotlib.pyplot as plt
 
 # Set up some default parameters for graphing
@@ -67,25 +68,37 @@ def get_program_data(echo_data, program, program_data, geo_json_data):
     # Aggregate data using agg_col and agg_type from DataSet.py
     # Aggregate for state and then district (clip)
     if ((program.agg_type=="count") & (program.name.find("RCRA") == -1)):
-        program_data['State'] = np.where((program_data[program.agg_col]=="S") | (program_data[program.agg_col]=="State"), 1,0) # Count state actions
-        program_data['Federal'] = np.where((program_data[program.agg_col]=="E") | (program_data[program.agg_col]=="EPA"), 1,0) # Count EPA actions
+        program_data['State Actions'] = np.where((program_data[program.agg_col]=="S") | (program_data[program.agg_col]=="State"), 1,0) # Count state actions
+        program_data['Federal Actions'] = np.where((program_data[program.agg_col]=="E") | (program_data[program.agg_col]=="EPA"), 1,0) # Count EPA actions
         program_data.reset_index(inplace=True) # By default, DataSet.py indexes the results from the query. But we have to reset the indext to group it.
-        t = program_data.groupby([program.idx_field,program.date_field])[["State", "Federal"]].sum()
-        state_bars = program_data.groupby(program.date_field)[["State", "Federal"]].sum() #Sum the counted State/EPA actions
+       
+        t = program_data.groupby([program.idx_field,program.date_field])[["State Actions", "Federal Actions"]].sum()
+        t=t.groupby([pd.Grouper(level=program.idx_field), 
+            pd.Grouper(level=program.date_field, freq='Y')] #Summarize by year to make search faster
+        ).sum()
+        #t.reset_index(inplace=True)
+        #t[program.date_field]=t[program.date_field].dt.strftime('%Y')
+
+        state_bars = program_data.groupby(program.date_field)[["State Actions", "Federal Actions"]].sum() #Sum the counted State/EPA actions
         state_bars = state_bars.resample("Y").sum()
         state_bars.index = state_bars.index.strftime('%Y')
-        program_data = program_data.groupby([program.idx_field])[[program.agg_col]].agg(program.agg_type) # Count of inspections etc. for each facility
+        #program_data = program_data.groupby([program.idx_field])[[program.agg_col]].agg(program.agg_type) # Count of inspections etc. for each facility
         stacked=True
     else:
         program_data.reset_index(inplace=True) # By default, DataSet.py indexes the results from the query. But we have to reset the indext to group it.
+        
         t = program_data.groupby([program.idx_field,program.date_field])[[program.agg_col]].agg(program.agg_type)
+        t=t.groupby([pd.Grouper(level=program.idx_field), 
+            pd.Grouper(level=program.date_field, freq='Y')] #Summarize by year to make search faster
+        ).sum()
+
         state_bars = program_data.groupby(program.date_field)[[program.agg_col]].agg(program.agg_type) # Sum of total emissions etc. in the district per year
         state_bars = state_bars.resample('Y').sum() # Sum again in case it wasn't summed the first time...
         state_bars.index = state_bars.index.strftime('%Y') 
-        program_data = program_data.groupby([program.idx_field])[[program.agg_col]].agg(program.agg_type) # Sum of emissions etc. for each facility across years
+        #program_data = program_data.groupby([program.idx_field])[[program.agg_col]].agg(program.agg_type) # Sum of emissions etc. for each facility across years
         stacked=False
         
-    print("representing "+str(program_data.shape[0])+" facilities.")
+    #print("representing "+str(program_data.shape[0])+" facilities.")
 
     # Find the facility that matches the program data, by REGISTRY_ID.  
     # Add lat and lon, facility name, and an index
@@ -94,22 +107,22 @@ def get_program_data(echo_data, program, program_data, geo_json_data):
     time_data = []
     no_data_ids = []
 
-    # Look through all the facilities in my area and program and get supplemental echo_data info
-    if (program_data is None): # Handle no data
-        print("Sorry, we don't have data for this program! That could be an error on our part, or ECHO's, or because the data type doesn't apply to this area.")
-    else:
-        for fac in program_data.itertuples():
-            fac_id = fac.Index # Use the Index
-            reg_id = key[fac_id] # Look up this facility's Registry ID through its Program ID
-            try:
-                e=echo_data.loc[echo_data.index==reg_id].copy()[['FAC_NAME', 'FAC_LAT', 'FAC_LONG', 'DFR_URL', 'FAC_PERCENT_MINORITY']].to_dict('index')
-                e = e[reg_id] # remove indexer
-                p =  fac._asdict() #split id and year?
-                e.update(p)
-                my_prog_data.append(e)
-            except KeyError:
-                # The facility wasn't found in the program data.
-                no_data_ids.append( fac.Index )
+    # # Look through all the facilities in my area and program and get supplemental echo_data info
+    # if (program_data is None): # Handle no data
+    #     print("Sorry, we don't have data for this program! That could be an error on our part, or ECHO's, or because the data type doesn't apply to this area.")
+    # else:
+    #     for fac in program_data.itertuples():
+    #         fac_id = fac.Index # Use the Index
+    #         reg_id = key[fac_id] # Look up this facility's Registry ID through its Program ID
+    #         try:
+    #             e=echo_data.loc[echo_data.index==reg_id].copy()[['FAC_NAME', 'FAC_LAT', 'FAC_LONG', 'DFR_URL', 'FAC_PERCENT_MINORITY']].to_dict('index')
+    #             e = e[reg_id] # remove indexer
+    #             p =  fac._asdict() #split id and year?
+    #             e.update(p)
+    #             my_prog_data.append(e)
+    #         except KeyError:
+    #             # The facility wasn't found in the program data.
+    #             no_data_ids.append( fac.Index )
     
     # Look through all the facilities in my area and program and get supplemental echo_data info
     if (t is None): # Handle no data
@@ -127,13 +140,11 @@ def get_program_data(echo_data, program, program_data, geo_json_data):
             try:
                 e=echo_data.loc[echo_data.index==reg_id].copy()[['FAC_NAME', 'FAC_LAT', 'FAC_LONG', 'DFR_URL', 'FAC_PERCENT_MINORITY']].to_dict('index')
                 e = e[reg_id] # remove indexer
-                e.update({"Index":fac_id})
-                e.update({program.date_field : date})
+                e.update({"Index":fac_id, program.date_field : date})
                 if program.agg_type == "sum":
                     e.update({program.agg_col : data})
                 else:
-                    e.update({"State": state})
-                    e.update({"Federal": federal})
+                    e.update({"State Actions": state, "Federal Actions": federal})
                 time_data.append(e)
             except KeyError:
                 # The facility wasn't found in the program data.
