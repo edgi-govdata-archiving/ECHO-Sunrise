@@ -21,33 +21,27 @@ def make_data_sets():
                     table_name='RCRA_EVALUATIONS', echo_type="RCRA",
                     date_field='EVALUATION_START_DATE', date_format='%m/%d/%Y', agg_type = "count", agg_col="EVALUATION_AGENCY", unit="inspections") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds
-    ds = DataSet( name='RCRA Enforcements',  echo_type="RCRA",
+    ds = DataSet( name='RCRA Penalties',  echo_type="RCRA",
                     table_name='RCRA_ENFORCEMENTS', idx_field='ID_NUMBER', 
-                    date_field='ENFORCEMENT_ACTION_DATE', date_format='%m/%d/%Y', agg_type = "count", agg_col="ENFORCEMENT_AGENCY", unit="enforcement actions") # For possible later use in assessing state v federal 
+                    date_field='ENFORCEMENT_ACTION_DATE', date_format='%m/%d/%Y', agg_type = "sum", agg_col="Penalties", unit="dollars")
     data_sets[ ds.name ] = ds
     ds = DataSet( name='CAA Violations',  echo_type="AIR",
                     table_name='ICIS-AIR_VIOLATION_HISTORY', idx_field='pgm_sys_id', 
                     date_field='HPV_DAYZERO_DATE', date_format='%m-%d-%Y', agg_type = "count", agg_col="AGENCY_TYPE_DESC", unit="violations") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds
-    ds = DataSet( name='CAA Enforcement Penalties', echo_type="AIR",
-                    table_name='ICIS-AIR_FORMAL_ACTIONS', idx_field='pgm_sys_id',
-                    date_field='SETTLEMENT_ENTERED_DATE', date_format='%m/%d/%Y' , agg_type = "sum", agg_col="PENALTY_AMOUNT", unit="dollars")
-    data_sets[ ds.name ] = ds
     ds = DataSet( name='CAA Insepections', echo_type="AIR",
                     table_name='ICIS-AIR_FCES_PCES', idx_field='PGM_SYS_ID',
                     date_field='ACTUAL_END_DATE', date_format='%m-%d-%Y' , agg_type = "count", agg_col="STATE_EPA_FLAG", unit="inspections") # For possible later use in assessing state v federal 
+    data_sets[ ds.name ] = ds
+    ds = DataSet( name='CAA Penalties', echo_type="AIR",
+                    table_name='ICIS-AIR_FORMAL_ACTIONS', idx_field='pgm_sys_id',
+                    date_field='SETTLEMENT_ENTERED_DATE', date_format='%m/%d/%Y' , agg_type = "sum", agg_col="PENALTY_AMOUNT", unit="dollars")
     data_sets[ ds.name ] = ds
     my_sql = "select * from `POLL_RPT_COMBINED_EMISSIONS` " + \
                 " where PGM_SYS_ACRNM = 'E-GGRT' and REGISTRY_ID in "
     ds = DataSet( name='Greenhouse Gas Emissions', echo_type="GHG",
                     table_name='POLL_RPT_COMBINED_EMISSIONS', idx_field='REGISTRY_ID',
                     date_field='REPORTING_YEAR', date_format='%Y', sql = my_sql, agg_type = "sum", agg_col="ANNUAL_EMISSION", unit="metric tons of CO2 equivalent")
-    data_sets[ ds.name ] = ds
-    my_sql = "select * from `POLL_RPT_COMBINED_EMISSIONS` " + \
-                 " where PGM_SYS_ID = 'TRIS' and REGISTRY_ID in "
-    ds = DataSet( name='Toxic Releases Inventory - Air', echo_type="TRI",
-                    table_name='POLL_RPT_COMBINED_EMISSIONS', idx_field='REGISTRY_ID',
-                    date_field='REPORTING_YEAR', date_format='%Y', sql = my_sql, agg_type = "sum", agg_col="ANNUAL_EMISSION", unit="pounds")
     data_sets[ ds.name ] = ds
     ds = DataSet( name='CWA Violations', echo_type="NPDES",
                     table_name='NPDES_QNCR_HISTORY', idx_field='NPDES_ID',
@@ -57,9 +51,9 @@ def make_data_sets():
                     table_name='NPDES_INSPECTIONS', idx_field='NPDES_ID',
                     date_field='ACTUAL_END_DATE', date_format='%m/%d/%Y', agg_type = "count", agg_col="STATE_EPA_FLAG", unit="inspections") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds
-    ds = DataSet( name='CWA Enforcements', echo_type="NPDES",
+    ds = DataSet( name='CWA Penalties', echo_type="NPDES",
                     table_name='NPDES_FORMAL_ENFORCEMENT_ACTIONS', idx_field='NPDES_ID',
-                    date_field='SETTLEMENT_ENTERED_DATE', date_format='%m/%d/%Y', agg_type = "count", agg_col="AGENCY", unit="enforcement actions") # For possible later use in assessing state v federal 
+                    date_field='SETTLEMENT_ENTERED_DATE', date_format='%m/%d/%Y', agg_type = "sum", agg_col="Penalties", unit="dollars")
     data_sets[ ds.name ] = ds
 
     return data_sets
