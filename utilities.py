@@ -34,7 +34,7 @@ def get_program_data(echo_data, program, program_data, geo_json_data):
     key=dict() # Create a way to look up Registry IDs in ECHO_EXPORTER later
 
     #### We need to provide a custom list of program ids for some programs.
-    if ( program.name == "CAA Inspections"): # or program.name == "CAA Penalties"
+    if ( program.name == "CAA Inspections"): 
         # The REGISTRY_ID field is the index of the echo_data
         registry_ids = echo_data[echo_data['AIR_FLAG'] == 'Y'].index.values
         key = { i : i for i in registry_ids }
@@ -56,12 +56,14 @@ def get_program_data(echo_data, program, program_data, geo_json_data):
             except ( KeyError, AttributeError ) as e:
                 pass
         program_data = program.get_data( ee_ids=ids )
+    
+    all_data=program_data
 
     #### Handle special penalties cases...
     if (program.name == "CWA Penalties"): 
-        program_data[program.agg_col] = program_data["FED_PENALTY_ASSESSED_AMT"] + program_data["STATE_LOCAL_PENALTY_AMT"] 
+        program_data[program.agg_col] = program_data["FED_PENALTY_ASSESSED_AMT"].fillna(0) + program_data["STATE_LOCAL_PENALTY_AMT"].fillna(0)  
     if (program.name == "RCRA Penalties"): 
-        program_data[program.agg_col] =  program_data["PMP_AMOUNT"] + program_data["FMP_AMOUNT"] + program_data["FSC_AMOUNT"] + program_data["SCR_AMOUNT"]
+        program_data[program.agg_col] =  program_data["PMP_AMOUNT"].fillna(0) + program_data["FMP_AMOUNT"].fillna(0) + program_data["FSC_AMOUNT"].fillna(0) + program_data["SCR_AMOUNT"].fillna(0) # Lots of NaNs here. For now, replace with zero :(
 
     #### Filter to 2010 and later
     # Handle CWA separately
@@ -110,8 +112,29 @@ def get_program_data(echo_data, program, program_data, geo_json_data):
     state_bars = pd.DataFrame(state_bars)
     time_data = pd.DataFrame(time_data)
 
+    # Join the facilities and the chosen district
+    gdf = geopandas.GeoDataFrame(
+        time_data, crs= "EPSG:4326", geometry=geopandas.points_from_xy(time_data["FAC_LONG"], time_data["FAC_LAT"]))
+    district_time_data = geopandas.sjoin(gdf, geo_json_data, how="inner", op='intersects')
 
-    return time_data, state_bars
+    # Create district bar charts
+    district_bars = district_time_data.groupby(program.date_field)[[program.agg_col]].sum() # Sum of total emissions, violations, etc. in the district for the whole year
+    district_bars = district_bars.resample('Y').sum() # Sum again in case it wasn't summed the first time...
+    district_bars.index = district_bars.index.strftime('%Y')
+
+    # Aggregate time data for each facility
+    district_program_data = time_data.groupby(["DFR_URL","FAC_LAT","FAC_LONG","FAC_NAME","FAC_PERCENT_MINORITY", "Index"])[[program.agg_col]].sum() # sum up years
+    district_program_data.reset_index(inplace=True)
+    gdf = geopandas.GeoDataFrame(
+        district_program_data, crs= "EPSG:4326", geometry=geopandas.points_from_xy(district_program_data["FAC_LONG"], district_program_data["FAC_LAT"]))
+    district_program_data = geopandas.sjoin(gdf, geo_json_data, how="inner", op='intersects')
+
+    state_bars.reset_index(inplace=True)
+    district_bars.reset_index(inplace=True)
+    bars = state_bars.join(district_bars, rsuffix=" in this District")
+    bars.set_index('index', inplace=True)
+
+    return district_program_data, bars, all_data
 
 
 
