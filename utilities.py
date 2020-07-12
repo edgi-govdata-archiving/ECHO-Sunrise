@@ -1,10 +1,7 @@
 import folium
-from folium.plugins import FastMarkerCluster
 from folium import FeatureGroup
-from folium.features import DivIcon
 import numpy as np
 import pandas as pd
-import geopandas
 import matplotlib.pyplot as plt
 
 # Set up some default parameters for graphing
@@ -30,7 +27,7 @@ plt.rc('legend', fancybox = True, framealpha=1, shadow=True, borderpad=1)
 def formatter(value):
     return f'{value:,}'
 
-def get_program_data(echo_data, program, program_data, geo_json_data):
+def get_program_data(echo_data, program, program_data, district):
     key=dict() # Create a way to look up Registry IDs in ECHO_EXPORTER later
 
     #### We need to provide a custom list of program ids for some programs.
@@ -63,7 +60,7 @@ def get_program_data(echo_data, program, program_data, geo_json_data):
     if (program.name == "CWA Penalties"): 
         program_data[program.agg_col] = program_data["FED_PENALTY_ASSESSED_AMT"].fillna(0) + program_data["STATE_LOCAL_PENALTY_AMT"].fillna(0)  
     if (program.name == "RCRA Penalties"): 
-        program_data[program.agg_col] =  program_data["PMP_AMOUNT"].fillna(0) + program_data["FMP_AMOUNT"].fillna(0) + program_data["FSC_AMOUNT"].fillna(0) + program_data["SCR_AMOUNT"].fillna(0) # Lots of NaNs here. For now, replace with zero :(
+        program_data[program.agg_col] =  program_data["FMP_AMOUNT"].fillna(0) # Lots of NaNs here. For now, replace with zero :(
 
     #### Filter to 2010 and later
     # Handle CWA separately
@@ -76,18 +73,17 @@ def get_program_data(echo_data, program, program_data, geo_json_data):
     #### Aggregate data using agg_col and agg_type from DataSet.py
     program_data.reset_index(inplace=True) # By default, DataSet.py indexes the results from the query. But we have to reset the indext to group it.
     
-    t = program_data.groupby([program.idx_field,program.date_field])[[program.agg_col]].agg(program.agg_type)
+    t = program_data.groupby([program.idx_field,program.date_field])[[program.agg_col]].agg(program.agg_type) # Count inspections and violations, sum emissions and penalties
     t=t.groupby([pd.Grouper(level=program.idx_field), 
-        pd.Grouper(level=program.date_field, freq='Y')] #Summarize by year to make search faster
+        pd.Grouper(level=program.date_field, freq='Y')] # Summarize everything by year to make search faster
     ).sum()
 
-    state_bars = program_data.groupby(program.date_field)[[program.agg_col]].agg(program.agg_type) # Sum of total emissions etc. in the district per year
-    state_bars = state_bars.resample('Y').sum() # Sum again in case it wasn't summed the first time...
-    state_bars.index = state_bars.index.strftime('%Y')
+    state_bars = program_data.groupby(program.date_field)[[program.agg_col]].agg(program.agg_type) # Sum of total emissions or penalties, or count of inspections or violations, in the district
+    state_bars = state_bars.resample('Y').sum() # Summarize by year
+    state_bars.index = state_bars.index.strftime('%Y') # Make the year look pretty e.g. 2018 instead of 2018-12-31.
 
     #### Find the facility that matches the program data, by REGISTRY_ID.  
-    # Add lat and lon, facility name, and an index
-    # (Note: not adding REGISTRY_ID right now as it is sometimes interpreted as an int and that messes with the charts...)
+    # Add additional information, like congressional district #, lat and lon, facility name, and the program-specific id (index)
     time_data = []
     no_data_ids = []
 
@@ -96,12 +92,12 @@ def get_program_data(echo_data, program, program_data, geo_json_data):
         print("Sorry, we don't have data for this program! That could be an error on our part, or ECHO's, or because the data type doesn't apply to this area.")
     else:
         for fac in t.itertuples():
-            fac_id = fac.Index[0] # the id
-            date = fac.Index[1] # the date
+            fac_id = fac.Index[0] # the facility id
+            date = fac.Index[1] # the year
             data = fac[1] # the data we want... e.g. annual emissions 
-            reg_id = key[fac_id] # Look up this facility's Registry ID through its Program ID
+            reg_id = key[fac_id] # Look up this facility's main Registry ID through its Program ID
             try:
-                e=echo_data.loc[echo_data.index==reg_id].copy()[['FAC_NAME', 'FAC_LAT', 'FAC_LONG', 'DFR_URL', 'FAC_PERCENT_MINORITY']].to_dict('index')
+                e=echo_data.loc[echo_data.index==reg_id].copy()[['FAC_NAME', 'FAC_DERIVED_CD113', 'FAC_LAT', 'FAC_LONG', 'DFR_URL', 'FAC_PERCENT_MINORITY']].to_dict('index')
                 e = e[reg_id] # remove indexer
                 e.update({"Index":fac_id, program.date_field : date, program.agg_col : data})
                 time_data.append(e)
@@ -112,22 +108,18 @@ def get_program_data(echo_data, program, program_data, geo_json_data):
     state_bars = pd.DataFrame(state_bars)
     time_data = pd.DataFrame(time_data)
 
-    # Join the facilities and the chosen district
-    gdf = geopandas.GeoDataFrame(
-        time_data, crs= "EPSG:4326", geometry=geopandas.points_from_xy(time_data["FAC_LONG"], time_data["FAC_LAT"]))
-    district_time_data = geopandas.sjoin(gdf, geo_json_data, how="inner", op='intersects')
+    # Filter the facilities to the chosen congressional district
+    district_time_data = time_data.loc[(time_data["FAC_DERIVED_CD113"]==district)]
 
     # Create district bar charts
-    district_bars = district_time_data.groupby(program.date_field)[[program.agg_col]].sum() # Sum of total emissions, violations, etc. in the district for the whole year
-    district_bars = district_bars.resample('Y').sum() # Sum again in case it wasn't summed the first time...
+    district_bars = district_time_data.groupby(program.date_field)[[program.agg_col]].sum() # Sum of total emissions, violations, etc. _in this district_ for the whole year
+    district_bars = district_bars.resample('Y').sum() # Resample by year
     district_bars.index = district_bars.index.strftime('%Y')
 
     # Aggregate time data for each facility
-    district_program_data = time_data.groupby(["DFR_URL","FAC_LAT","FAC_LONG","FAC_NAME","FAC_PERCENT_MINORITY", "Index"])[[program.agg_col]].sum() # sum up years
+    district_program_data = time_data.groupby(["DFR_URL","FAC_DERIVED_CD113", "FAC_LAT","FAC_LONG","FAC_NAME","FAC_PERCENT_MINORITY", "Index"])[[program.agg_col]].sum() # Sum up years
     district_program_data.reset_index(inplace=True)
-    gdf = geopandas.GeoDataFrame(
-        district_program_data, crs= "EPSG:4326", geometry=geopandas.points_from_xy(district_program_data["FAC_LONG"], district_program_data["FAC_LAT"]))
-    district_program_data = geopandas.sjoin(gdf, geo_json_data, how="inner", op='intersects')
+    district_program_data = district_program_data.loc[(district_program_data["FAC_DERIVED_CD113"]==district)]
 
     state_bars.reset_index(inplace=True)
     district_bars.reset_index(inplace=True)
@@ -153,16 +145,17 @@ def mapper_area(df, geo_json_data, a, units):
             radius = scale[row["quantile"]],
             color = "black",
             weight = 1,
-            fill_color = "orange",
-            fill_opacity = .4
+            fill_color = "orange" if (int(row[a]) > 0) else "grey",
+            fill_opacity = .4,
+            tooltip = row["FAC_NAME"]+": " + formatter(int(row[a])) + " " + units + ""
         ).add_to(cm_map)
+    #folium.GeoJsonTooltip(fields=["District"]).add_to(gj)
     cm_map.add_to(m)
     
     gj = folium.GeoJson(
         geo_json_data,
         name = "Congressional District",
     )
-    folium.GeoJsonTooltip(fields=["District"]).add_to(gj)
     gj.add_to(m)
 
     
