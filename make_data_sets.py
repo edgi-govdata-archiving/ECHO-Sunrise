@@ -29,7 +29,7 @@ def make_data_sets():
                     table_name='ICIS-AIR_VIOLATION_HISTORY', idx_field='pgm_sys_id', 
                     date_field='HPV_DAYZERO_DATE', date_format='%m-%d-%Y', agg_type = "count", agg_col="AGENCY_TYPE_DESC", unit="violations") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds
-    ds = DataSet( name='CAA Insepections', echo_type="AIR",
+    ds = DataSet( name='CAA Inspections', echo_type="AIR",
                     table_name='ICIS-AIR_FCES_PCES', idx_field='PGM_SYS_ID',
                     date_field='ACTUAL_END_DATE', date_format='%m-%d-%Y' , agg_type = "count", agg_col="STATE_EPA_FLAG", unit="inspections") # For possible later use in assessing state v federal 
     data_sets[ ds.name ] = ds

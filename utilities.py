@@ -31,11 +31,6 @@ def get_program_data(echo_data, program, program_data, district):
     key=dict() # Create a way to look up Registry IDs in ECHO_EXPORTER later
 
     #### We need to provide a custom list of program ids for some programs.
-    if ( program.name == "CAA Inspections"): 
-        # The REGISTRY_ID field is the index of the echo_data
-        registry_ids = echo_data[echo_data['AIR_FLAG'] == 'Y'].index.values
-        key = { i : i for i in registry_ids }
-        program_data = program.get_data( ee_ids=registry_ids )
     elif ( program.name == "Greenhouse Gas Emissions"):
         program_flag = program.echo_type + '_FLAG'
         registry_ids = echo_data[echo_data[ program_flag ] == 'Y'].index.values
@@ -124,7 +119,7 @@ def get_program_data(echo_data, program, program_data, district):
     state_bars.reset_index(inplace=True)
     district_bars.reset_index(inplace=True)
     bars = state_bars.join(district_bars, rsuffix=" in this District")
-    bars.set_index('index', inplace=True)
+    bars.set_index(program.date_field, inplace=True)
 
     return district_program_data, bars, all_data
 
