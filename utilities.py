@@ -31,7 +31,7 @@ def get_program_data(echo_data, program, program_data, district):
     key=dict() # Create a way to look up Registry IDs in ECHO_EXPORTER later
 
     #### We need to provide a custom list of program ids for some programs.
-    elif ( program.name == "Greenhouse Gas Emissions"):
+    if ( program.name == "Greenhouse Gas Emissions"):
         program_flag = program.echo_type + '_FLAG'
         registry_ids = echo_data[echo_data[ program_flag ] == 'Y'].index.values
         program_data = program.get_data( ee_ids=registry_ids )
