@@ -131,19 +131,24 @@ def mapper_area(df, geo_json_data, a, units):
 
     # Scale the size of the circles
     scale = {0:4, 1:10, 2:16, 3:24, 4:32}
+    default_radius = 10
     # Add a clickable marker for each facility
     cm_map = FeatureGroup(name="Facilities")
     for index, row in df.iterrows():
-        folium.CircleMarker(
-            location = [row["FAC_LAT"], row["FAC_LONG"]],
-            popup = row["FAC_NAME"] +": " + formatter(int(row[a])) + " " + units + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>", # + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>",
-            radius = scale[row["quantile"]],
-            color = "black",
-            weight = 1,
-            fill_color = "orange" if (int(row[a]) > 0) else "grey",
-            fill_opacity = .4,
-            tooltip = row["FAC_NAME"]+": " + formatter(int(row[a])) + " " + units + ""
-        ).add_to(cm_map)
+        try:
+            quantile = row["quantile"]
+            folium.CircleMarker(
+                location = [row["FAC_LAT"], row["FAC_LONG"]],
+                popup = row["FAC_NAME"] +": " + formatter(int(row[a])) + " " + units + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>", # + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>",
+                radius = default_radius if ( np.isnan( quantile )) else np.isscale[ quantile ],
+                color = "black",
+                weight = 1,
+                fill_color = "orange" if (int(row[a]) > 0) else "grey",
+                fill_opacity = .4,
+                tooltip = row["FAC_NAME"]+": " + formatter(int(row[a])) + " " + units + ""
+            ).add_to(cm_map)
+        except KeyError:
+            breakpoint()
     #folium.GeoJsonTooltip(fields=["District"]).add_to(gj)
     cm_map.add_to(m)
     
