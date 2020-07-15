@@ -30,7 +30,7 @@ def formatter(value):
 def get_program_data(echo_data, program, program_data, district):
     key=dict() # Create a way to look up Registry IDs in ECHO_EXPORTER later
 
-    #### We need to provide a custom list of program ids for some programs.
+    # We need to provide a custom list of program ids for some programs.
     if ( program.name == "Greenhouse Gas Emissions"):
         program_flag = program.echo_type + '_FLAG'
         registry_ids = echo_data[echo_data[ program_flag ] == 'Y'].index.values
@@ -51,13 +51,13 @@ def get_program_data(echo_data, program, program_data, district):
     
     all_data=program_data
 
-    #### Handle special penalties cases...
+    # Handle special penalties cases...
     if (program.name == "CWA Penalties"): 
         program_data[program.agg_col] = program_data["FED_PENALTY_ASSESSED_AMT"].fillna(0) + program_data["STATE_LOCAL_PENALTY_AMT"].fillna(0)  
     if (program.name == "RCRA Penalties"): 
         program_data[program.agg_col] =  program_data["FMP_AMOUNT"].fillna(0) # Lots of NaNs here. For now, replace with zero :(
 
-    #### Filter to 2010 and later
+    # Filter to 2010 and later
     # Handle CWA separately
     if (program.name == "CWA Violations"): 
         year = program_data[program.date_field].astype("str").str[0:4:1]
@@ -65,7 +65,7 @@ def get_program_data(echo_data, program, program_data, district):
     program_data[program.date_field] = pd.to_datetime(program_data[program.date_field], format=program.date_format, errors='coerce')
     program_data=program_data.loc[(program_data[program.date_field] >= pd.to_datetime('2010'))] 
     
-    #### Aggregate data using agg_col and agg_type from DataSet.py
+    # Aggregate data using agg_col and agg_type from DataSet.py
     program_data.reset_index(inplace=True) # By default, DataSet.py indexes the results from the query. But we have to reset the indext to group it.
     
     t = program_data.groupby([program.idx_field,program.date_field])[[program.agg_col]].agg(program.agg_type) # Count inspections and violations, sum emissions and penalties
@@ -77,7 +77,7 @@ def get_program_data(echo_data, program, program_data, district):
     state_bars = state_bars.resample('Y').sum() # Summarize by year
     state_bars.index = state_bars.index.strftime('%Y') # Make the year look pretty e.g. 2018 instead of 2018-12-31.
 
-    #### Find the facility that matches the program data, by REGISTRY_ID.  
+    # Find the facility that matches the program data, by REGISTRY_ID.  
     # Add additional information, like congressional district #, lat and lon, facility name, and the program-specific id (index)
     time_data = []
     no_data_ids = []
@@ -125,10 +125,11 @@ def get_program_data(echo_data, program, program_data, district):
 
 
 
-def mapper_area(df, geo_json_data, a, units):  
+def mapper_area(df, geo_json_data, a, units, program, title):  
     # Initialize the map
     m = folium.Map()
 
+    pg_colors = {"RCRA": "orange", "GHG": "green", "NPDES": "blue", "AIR": "red"}
     # Scale the size of the circles
     scale = {0:4, 1:10, 2:16, 3:24, 4:32}
     # Add a clickable marker for each facility
@@ -140,7 +141,7 @@ def mapper_area(df, geo_json_data, a, units):
             radius = scale[row["quantile"]],
             color = "black",
             weight = 1,
-            fill_color = "orange" if (int(row[a]) > 0) else "grey",
+            fill_color = pg_colors[program] if (int(row[a]) > 0) else "grey",
             fill_opacity = .4,
             tooltip = row["FAC_NAME"]+": " + formatter(int(row[a])) + " " + units + ""
         ).add_to(cm_map)
@@ -153,7 +154,9 @@ def mapper_area(df, geo_json_data, a, units):
     )
     gj.add_to(m)
 
-    
+    title_html = '<h3 align="center" style="font-size:20px"><b>'+title+'</b></h3>'
+
+    m.get_root().html.add_child(folium.Element(title_html))
     m.keep_in_front(cm_map)
     bounds = m.get_bounds()
     m.fit_bounds(bounds)
