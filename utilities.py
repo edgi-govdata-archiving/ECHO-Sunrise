@@ -140,7 +140,7 @@ def mapper_area(df, geo_json_data, a, units):
             folium.CircleMarker(
                 location = [row["FAC_LAT"], row["FAC_LONG"]],
                 popup = row["FAC_NAME"] +": " + formatter(int(row[a])) + " " + units + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>", # + "<p><a href='"+row["DFR_URL"]+"' target='_blank'>Link to ECHO detailed report</a></p>",
-                radius = default_radius if ( np.isnan( quantile )) else np.isscale[ quantile ],
+                radius = default_radius if ( np.isnan(quantile)) else scale[quantile],
                 color = "black",
                 weight = 1,
                 fill_color = "orange" if (int(row[a]) > 0) else "grey",
