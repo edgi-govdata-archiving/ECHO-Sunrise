@@ -119,19 +119,20 @@ def get_program_data(echo_data, program, program_data, district):
     state_bars.reset_index(inplace=True)
     district_bars.reset_index(inplace=True)
     bars = state_bars.join(district_bars, rsuffix=" in this District")
-    bars.set_index(program.date_field, inplace=True)
+    bars.set_index("index", inplace=True)
 
     return district_program_data, bars, all_data
 
 
 
-def mapper_area(df, geo_json_data, a, units):  
+def mapper_area(df, geo_json_data, a, units, program, title):  
     # Initialize the map
     m = folium.Map()
 
-    # Scale the size of the circles
+    # Scale the size of the circles and color them
     scale = {0:4, 1:10, 2:16, 3:24, 4:32}
-    default_radius = 10
+    default_radius = 8
+    pg_colors = {"RCRA": "orange", "GHG": "green", "NPDES": "blue", "AIR": "red"}
     # Add a clickable marker for each facility
     cm_map = FeatureGroup(name="Facilities")
     for index, row in df.iterrows():
@@ -143,7 +144,7 @@ def mapper_area(df, geo_json_data, a, units):
                 radius = default_radius if ( np.isnan(quantile)) else scale[quantile],
                 color = "black",
                 weight = 1,
-                fill_color = "orange" if (int(row[a]) > 0) else "grey",
+                fill_color = pg_colors[program] if (int(row[a]) > 0) else "grey",
                 fill_opacity = .4,
                 tooltip = row["FAC_NAME"]+": " + formatter(int(row[a])) + " " + units + ""
             ).add_to(cm_map)
@@ -158,7 +159,9 @@ def mapper_area(df, geo_json_data, a, units):
     )
     gj.add_to(m)
 
-    
+    title_html = '<h3 align="center" style="font-size:20px"><b>'+title+'</b></h3>'
+    m.get_root().html.add_child(folium.Element(title_html))
+
     m.keep_in_front(cm_map)
     bounds = m.get_bounds()
     m.fit_bounds(bounds)
