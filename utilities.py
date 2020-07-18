@@ -119,7 +119,7 @@ def get_program_data(echo_data, program, program_data, district):
     state_bars.reset_index(inplace=True)
     district_bars.reset_index(inplace=True)
     bars = state_bars.join(district_bars, rsuffix=" in this District")
-    bars.set_index("index", inplace=True)
+    bars.set_index(program.date_field, inplace=True) # Due to differences in pandas(?) this needs to be "index" on Eric's local, but should be program.date_field on Colab
 
     return district_program_data, bars, all_data
 
