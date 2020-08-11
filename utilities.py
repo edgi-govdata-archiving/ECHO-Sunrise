@@ -34,7 +34,7 @@ def get_program_data(echo_data, program, program_data, district):
     if ( program.name == "Greenhouse Gas Emissions"):
         program_flag = program.echo_type + '_FLAG'
         registry_ids = echo_data[echo_data[ program_flag ] == 'Y'].index.values
-        program_data = program.get_data( ee_ids=registry_ids )
+        program_data = program.get_data_by_ee_ids( ee_ids=registry_ids )
         key = { i : i for i in registry_ids }
     else:
         ids_string = program.echo_type + '_IDS'
@@ -47,7 +47,9 @@ def get_program_data(echo_data, program, program_data, district):
                     key[this_id]=index
             except ( KeyError, AttributeError ) as e:
                 pass
-        program_data = program.get_data( ee_ids=ids )
+        program_data = program.get_data_by_ee_ids( ee_ids=ids )
+    if ( program_data is None ):
+        return None, None, None
     
     all_data=program_data
 
