@@ -3,6 +3,10 @@
 # ECHO-Sunrise
 Partnership between EDGI's Environmental Enforcement Watch and Sunrise Boston hubs exploring environmental violations, penalties, and injustices in Massachusetts, using EDGI's mirror of the EPA's ECHO database and a customized, Jupyter Notebook-based analysis.
 
+Repo website
+
+[here](https://colab.research.google.com/github/edgi-govdata-archiving/ECHO-COVID19/blob/main/ECHO-COVID19.ipynb)
+
 ## Goals and requirements of notebook
 * The issues we want to cover: air pollution, water discharges, waste disposal, and greenhouse gas (GHG) emissions
 * **Geographies**: For Mass., look at Congressional Districts, State House districts, and municipalities
@@ -14,6 +18,8 @@ Partnership between EDGI's Environmental Enforcement Watch and Sunrise Boston hu
   * Point out areas for further research and enable Sunrise to raise awareness around individual local facilities, (non) enforcement and compliance trends.
 
 ## Outline of the notebook
+### Link to Jupyter Notebook
+[Here](https://colab.research.google.com/github/edgi-govdata-archiving/ECHO-COVID19/blob/main/ECHO-COVID19.ipynb)
 * Load helper code
   * `ECHO-modules/data_sets.py` for creating data classes
   * `ECHO-Geo/` ... GeoJSONs reprsenting different MA geographies. This is a repo that will need to be created.
